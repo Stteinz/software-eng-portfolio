@@ -490,6 +490,7 @@ Liste os principais contribuidores. Você pode usar links para seus perfis.
 | 👤 Nome | 🖼️ Foto | :octocat: GitHub | 💼 LinkedIn | 📤 Gmail |
 |---------|----------|-----------------|-------------|-----------|
 | Julia Rocha Fiorini | — | [GitHub](https://github.com) | [LinkedIn](https://www.linkedin.com/in) | julia.rochafiorini@gmail.com |
+| Gabriel Lemos Lacerda | — | [Stteinz](https://github.com/Stteinz) | [LinkedIn](https://www.linkedin.com/in) | gabriellemoslacerda@gmail.com |
 
 > [!TIP]
 > 💡 **Dica:** Escolha uma foto profissional, preferencialmente de rosto, evitando imagens com baixa qualidade, filtros excessivos ou elementos distrativos.
