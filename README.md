@@ -1,53 +1,41 @@
-<!-- Este template foi criado para servir como referência e pode ser facilmente adaptado para diferentes projetos de desenvolvimento -->
-
-<!-- [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=99999999&assignment_repo_type=AssignmentRepo) [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=99999999)
--->
-
-<a href="https://classroom.github.com/online_ide?assignment_repo_id=99999999&assignment_repo_type=AssignmentRepo"><img src="https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg" width="200"/></a> <a href="https://classroom.github.com/open-in-codespaces?assignment_repo_id=99999999"><img src="https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg" width="250"/></a>
-
----
-
-# 🏷️ Nome do Projeto 👨‍💻
+# 👩‍💻 Portfólio Profissional
 
 > [!NOTE]
-> Breve descrição do projeto. **Foque no principal valor/benefício.**  
-> Crie uma **logo** para o projeto que represente a aplicação em questão.
+> Website de portfólio profissional para apresentar trajetória, habilidades, projetos e formas de contato de maneira moderna e acessível. Projeto desenvolvido no âmbito do Laboratório de Desenvolvimento de Software (PUC Minas).
 
 <table>
   <tr>
     <td width="800px">
       <div align="justify">
-        Este <b>README.md</b> apresenta um template organizado, ideal para servir como referência acadêmica e profissional em projetos de desenvolvimento, desde trabalhos da faculdade até projetos desenvolvidos para etapas técnicas de processos seletivos. Ele reúne as <i>seções essenciais</i> recomendadas pelo <a href="https://github.com/joaopauloaramuni">Prof. Dr. João Paulo Aramuni</a>, permitindo <i>organização clara</i>, <i>documentação eficiente</i> e <i>padronização</i> entre diferentes trabalhos. O objetivo deste esqueleto é <b>facilitar a construção de projetos bem documentados</b>, oferecendo um <i>guia completo</i> que inclui <b>boas práticas</b>, instruções de execução, tecnologias utilizadas, arquitetura, estruturas de pastas, testes, links úteis e orientações para colaboração. Esse template ajuda estudantes a desenvolverem <b>documentação de qualidade profissional</b> desde os primeiros períodos, promovendo <i>clareza</i>, <i>reprodutibilidade</i> e <i>padronização</i> nos projetos.
+        Este projeto consiste em um <b>website de portfólio profissional</b> que permite apresentar de forma clara a formação, área de atuação, interesses e objetivos profissionais. O sistema possui seções de <i>Sobre Mim</i> (em português e inglês), <i>Projetos</i> (com linha do tempo e links para repositórios), <i>Experiências</i> profissionais e <i>Contato</i> com formulário funcional. O design é responsivo, com interface amigável e identidade visual coerente com o perfil de futura engenheira de software pela PUC Minas.
       </div>
     </td>
     <td>
       <div>
-        <img src="https://joaopauloaramuni.github.io/image/logo_ES_vertical.png" alt="Logo do Projeto" width="120px"/>
+        <img src="./docs/prototipo/prototipo-home.png" alt="Logo/Protótipo do Portfólio" width="120px" onerror="this.style.display='none'"/>
       </div>
     </td>
   </tr> 
 </table>
 
+> 💡 **Lab01S01:** `docs/prototipo/prototipo-home.png` 
+
 ---
 
 ## 🚧 Status do Projeto
 
-### Exemplos de badges básicos:
+[![Versão](https://img.shields.io/badge/Versão-v0.1.0-blue?style=for-the-badge)](https://github.com) [![Licença](https://img.shields.io/badge/Licença-MIT-green?style=for-the-badge)](#licença)
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/joaopauloaramuni/joaopauloaramuni/main.yml?branch=main)](https://github.com/joaopauloaramuni/joaopauloaramuni/actions/workflows/main.yml)
-[![Test Coverage](https://codecov.io/gh/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software/branch/main/graph/badge.svg)](https://codecov.io/gh/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software)
-[![Versão](https://img.shields.io/badge/Versão-v1.0.0-blue)](https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software/releases)
-[![Licença](https://img.shields.io/github/license/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software)](#licença)
+### Tecnologias previstas
 
-### Outros exemplos de badges:
-
-[![Versão](https://img.shields.io/badge/Versão-v1.0.0-blue?style=for-the-badge)](https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software/releases) ![React](https://img.shields.io/badge/React-19.1.1-007ec6?style=for-the-badge&logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-7.1.2-007ec6?style=for-the-badge&logo=vite&logoColor=white) ![Java](https://img.shields.io/badge/Java-17-007ec6?style=for-the-badge&logo=openjdk&logoColor=white) ![Maven](https://img.shields.io/badge/Maven-3.9.9-007ec6?style=for-the-badge&logo=apachemaven&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.5-007ec6?style=for-the-badge&logo=springboot&logoColor=white) ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-3.1.1-007ec6?style=for-the-badge&logo=thymeleaf&logoColor=white) ![GitHub repo size](https://img.shields.io/github/repo-size/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software?style=for-the-badge&logo=files) ![GitHub directory file count](https://img.shields.io/github/directory-file-count/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software?style=for-the-badge&logo=files) ![GitHub stars](https://img.shields.io/github/stars/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software?style=for-the-badge&logo=github) ![GitHub forks](https://img.shields.io/github/forks/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software?style=for-the-badge&logo=git) ![GitHub language count](https://img.shields.io/github/languages/count/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software?style=for-the-badge&logo=python) ![GitHub license](https://img.shields.io/github/license/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software?style=for-the-badge&color=007ec6&logo=opensourceinitiative) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software?style=for-the-badge&color=007ec6&logo=gitkraken) ![GitHub last commit](https://img.shields.io/github/last-commit/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software?style=for-the-badge&logo=clockify) ![Vercel](https://vercelbadge.vercel.app/api/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge) ![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2Fjoaopauloaramuni%2Flaboratorio-de-desenvolvimento-de-software&leftColor=555555&rightColor=007ec6&type=total&label=RepoViews)
+![Nuxt](https://img.shields.io/badge/Nuxt-3+-00DC82?style=flat-square&logo=nuxt.js&logoColor=white) ![Vue](https://img.shields.io/badge/Vue-3+-4FC08D?style=flat-square&logo=vue.js&logoColor=white) ![Three.js](https://img.shields.io/badge/Three.js-r170+-000000?style=flat-square&logo=threedotjs&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?style=flat-square&logo=typescript&logoColor=white)
 
 ---
 
 ## 📚 Índice
 - [Links Úteis](#-links-úteis)
 - [Sobre o Projeto](#-sobre-o-projeto)
+- [Protótipos (Lab01S01)](#-protótipos-lab01s01)
 - [Funcionalidades Principais](#-funcionalidades-principais)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Arquitetura](#-arquitetura)
@@ -55,18 +43,8 @@
 - [Instalação e Execução](#-instalação-e-execução)
   - [Pré-requisitos](#pré-requisitos)
   - [Variáveis de Ambiente](#-variáveis-de-ambiente)
-     - [1 Back-end (Spring Boot)](#1-back-end-spring-boot)
-     - [2 Front-end (React, Vite)](#2-front-end-react-vite)
-     - [3 Exemplos de Variáveis de Ambiente na Vercel](#3-exemplos-de-variáveis-de-ambiente-na-vercel)
   - [Instalação de Dependências](#-instalação-de-dependências)
-    - [Front-end (React)](#front-end-react)
-    - [Back-end (Spring Boot)](#back-end-spring-boot)
-  - [Inicialização do Banco de Dados (PostgreSQL)](#-inicialização-do-banco-de-dados-postgresql)
   - [Como Executar a Aplicação](#-como-executar-a-aplicação)
-    - [Terminal 1: Back-end (Spring Boot)](#terminal-1-back-end-spring-boot)
-    - [Terminal 2: Front-end (React, Vite)](#terminal-2-front-end-react-vite)
-    - [Execução Local Completa com Docker Compose (Incluindo Banco de Dados)](#-execução-local-completa-com-docker-compose-incluindo-banco-de-dados)
-    - [Passos para build, inicialização e execução](#-passos-para-build-inicialização-e-execução)
 - [Deploy](#-deploy)
 - [Estrutura de Pastas](#-estrutura-de-pastas)
 - [Demonstração](#-demonstração)
@@ -93,37 +71,43 @@
 ---
 
 ## 📝 Sobre o Projeto
-Nesta seção, descreva de forma clara e objetiva **o propósito do seu projeto**, explicando:
 
-- **Por que ele existe** — qual motivação levou à sua criação.  
-- **Qual problema ele resolve** — que dor, necessidade ou oportunidade ele atende.  
-- **Qual o contexto** — acadêmico, profissional, pessoal, experimental, etc.  
-- **Onde ele pode ser utilizado** — cenários reais ou simulados.  
+O **Portfólio Profissional** é um website desenvolvido para apresentar a trajetória acadêmica e profissional, destacando projetos, habilidades e formas de contato. O projeto foi desenvolvido no âmbito da disciplina **Laboratório de Desenvolvimento de Software** (PUC Minas).
 
-Procure responder perguntas como:
-- *Qual foi a ideia inicial do projeto?*
-- *O que ele entrega de valor ao usuário?*
-- *Por que alguém utilizaria ou contribuiria com esse projeto?*
-- *O que o torna relevante ou interessante?*
+- **Motivação:** Criar uma presença online profissional e moderna para divulgação de trabalhos e contato com recrutadores e parceiros.
+- **Objetivo:** Apresentar formação (Engenharia de Software pela PUC Minas), área de atuação (Desenvolvimento Web, Backend PHP/Laravel), interesses e objetivos profissionais.
+- **Contexto:** Projeto acadêmico com foco em boas práticas de desenvolvimento, design responsivo e hospedagem em nuvem.
 
-Escreva de forma objetiva, mas completa, para que qualquer pessoa entenda rapidamente **o que é** e **por que importa**.
+---
 
-> [!NOTE]
-> Esta seção segue boas práticas de documentação profissional e deve ser ajustada conforme o tipo e o objetivo do seu projeto.
+## 📐 Protótipos (Lab01S01)
+
+O protótipo foi desenvolvido com média fidelidade no Figma, contemplando as seções principais do site.
+
+| Protótipo — Visão Geral (Home) |
+| :---: |
+| ![Protótipo Home](./docs/prototipo/prototipo-home.png) |
+
+**Elementos do protótipo:**
+- **Cabeçalho e navegação:** Logo, menu (Home, Works, About-me, Contacts), seletor de idioma (PT/EN)
+- **Hero:** Nome, tagline "Future software engineer by PUC Minas", botão "Contact me", citação inspiracional (Charlie Brown Jr.)
+- **#projects:** Cards de projetos com tecnologias, link Live e GitHub (Cached)
+- **#skills:** Categorias (Languages, Databases, Tools, Frameworks) — TS, JavaScript, HTML, MySQL, VSCode, Git, React, Laravel, Vuetify
+- **#about-me:** Texto de apresentação em inglês (Lab01S02 adicionará versão PT)
+- **#contacts:** E-mail, mensagem convidando ao contato
+
+> imagem do protótipo em `docs/prototipo/prototipo-home.png`
 
 ---
 
 ## ✨ Funcionalidades Principais
-Liste as funcionalidades de forma clara e objetiva.
 
-- 🔐 **Autenticação Segura:** Login, Cadastro e Recuperação de Senha.
-- 📈 **Painel de Controle:** Visualização de dados em tempo real com gráficos.
-- ⚙️ **Gerenciamento de CRUD:** Criação, Leitura, Atualização e Deleção de recursos (e.g., Usuários, Itens, Posts).
-- 📊 **Relatórios Exportáveis:** Exportação de dados em PDF, CSV ou Excel.
-- 🌐 **Internacionalização (i18n):** Suporte a múltiplos idiomas.
-- 🧵 **Logs e Monitoramento:** Registro detalhado de atividades e análise de desempenho.
-- 🔄 **Integração com APIs Externas:** Conexão com serviços de terceiros (pagamentos, mapas, autenticação, etc.).
-- 📨 **Sistema de Notificações:** Envio de alertas por e-mail, push ou notificações internas.
+Conforme requisitos do laboratório:
+
+- 👤 **Sobre Mim:** Breve apresentação em português e inglês, destacando formação, área de atuação, interesses e objetivos profissionais.
+- 📁 **Projetos:** Linha do tempo de projetos (mais antigo ao mais recente). Cada projeto contém: nome e descrição, tecnologias utilizadas, link para repositório no GitHub, imagem ou GIF com o projeto em funcionamento.
+- 💼 **Experiências:** Relato de experiências profissionais, estágios, freelas, participações em projetos open source ou eventos técnicos. Para cada item: empresa/instituição, cargo ou atividade, período e breve descrição.
+- 📧 **Contato:** Ícones clicáveis para e-mail, WhatsApp, LinkedIn; formulário com campos nome, e-mail e mensagem, com envio por e-mail (ex.: EmailJS).
 
 ---
 
@@ -133,11 +117,11 @@ As seguintes ferramentas, frameworks e bibliotecas foram utilizados na construç
 
 ### 💻 Front-end
 
-* **Framework/Biblioteca:** [Ex: React v18, Vue.js v3, Angular v17]
-* **Linguagem/Superset:** [Ex: TypeScript, JavaScript ES6+]
+* **Framework/Biblioteca:** Nuxt 3 (Vue 3)
+* **Linguagem/Superset:** TypeScript, JavaScript ES6+
+* **Gráficos 3D:** Three.js
 * **Estilização:** [Ex: Tailwind CSS, Sass, Styled Components, Material UI]
-* **Gerenciamento de Estado:** [Ex: Redux Toolkit, Zustand, Context API]
-* **Build Tool:** [Ex: Vite, Webpack]
+* **Envio de e-mail:** EmailJS
 
 ### 🖥️ Back-end
 
@@ -182,11 +166,11 @@ Para melhor visualização e entendimento da estrutura do sistema, os diagramas 
 | Diagrama de Arquitetura | Detalhe da Arquitetura |
 | :---: | :---: |
 | **Visão Geral (Macro)** | **Camada de Serviço (Micro)** |
-| <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Diagrama de Visão Geral do Sistema" width="120px" height="120px"> | <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Diagrama de Componentes ou Serviço X" width="120px" height="120px"> |
+| | |
 | **Modelo de Dados (Entidades)** | **Fluxo de Autenticação** |
-| <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Diagrama de Entidade-Relacionamento (DER)" width="120px" height="120px"> | <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Diagrama de Sequência de Login" width="120px" height="120px"> |
+| | |
 | **Infraestrutura (Cloud)** | **API Gateway (Rotas)** |
-| <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Diagrama de Deploy na AWS/Vercel" width="120px" height="120px"> | <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Mapa de Endpoints da API" width="120px" height="120px"> |
+| | |
 
 ---
 
@@ -196,11 +180,9 @@ Para melhor visualização e entendimento da estrutura do sistema, os diagramas 
 Certifique-se de que o usuário tenha o ambiente configurado.
 
 * **Java JDK:** Versão **17** ou superior (Necessário para o **Back-end Spring Boot**)
-* **Node.js:** Versão LTS (v18.x ou superior) (Necessário para o **Front-end React**)
+* **Node.js:** Versão LTS (v18.x ou superior) (Necessário para o **Front-end Nuxt**)
 * **Gerenciador de Pacotes:** npm ou yarn
 * **Docker** (Opcional, mas **altamente recomendado** para rodar o Banco de Dados)
-
----
 
 ### 🔑 Variáveis de Ambiente
 
@@ -218,15 +200,16 @@ Configure estas variáveis como **variáveis de ambiente do sistema** ou em um a
 | `SPRING_DATASOURCE_PASSWORD` | Senha do banco de dados. | `senha-segura-123` |
 | `JWT_SECRET` | Chave secreta para assinatura de tokens (Opcional). | `chave_super_segura_base64` |
 
-#### 2 Front-end (React, Vite)
+#### 2 Front-end (Nuxt)
 
-Crie um arquivo **`.env`** na raiz da pasta `/frontend` e use o prefixo `VITE_` (ou `REACT_APP_` se estiver usando CRA) para expor as variáveis ao *bundle* da aplicação.
+Crie um arquivo **`.env`** na raiz do projeto e use o prefixo `NUXT_PUBLIC_` para expor as variáveis ao *bundle* da aplicação.
 
 | Variável | Descrição | Exemplo |
 | :--- | :--- | :--- |
-| `VITE_API_URL` | URL base do endpoint do Backend Spring Boot. | `http://localhost:8080/api` |
-| `VITE_EMAILJS_PUBLIC_KEY` | Chave pública para serviços de e-mail (Exemplo). | `sua_public_key_aqui` |
-| `VITE_GOOGLE_MAPS_KEY` | Chave de API para serviços de mapas (Opcional). | `AIzaSy...` |
+| `NUXT_PUBLIC_API_URL` | URL base do endpoint do Backend (se houver). | `http://localhost:8080/api` |
+| `NUXT_PUBLIC_EMAILJS_SERVICE_ID` | ID do serviço EmailJS. | `seu_service_id_aqui` |
+| `NUXT_PUBLIC_EMAILJS_TEMPLATE_ID` | ID do template de e-mail. | `seu_template_id_aqui` |
+| `NUXT_PUBLIC_EMAILJS_PUBLIC_KEY` | Chave pública EmailJS. | `sua_public_key_aqui` |
 
 ---
 
@@ -235,47 +218,16 @@ Crie um arquivo **`.env`** na raiz da pasta `/frontend` e use o prefixo `VITE_` 
 A Vercel permite configurar variáveis no painel (Project Settings > Environment Variables).
 Aqui estão exemplos comuns utilizadas em aplicações front-end e full-stack:
 
----
-
-##### **Exemplo 1 – Front-end com Next.js usando API externa**
+##### **Exemplo 4 – Frontend com Nuxt (EmailJS)**
 
 ```
-NEXT_PUBLIC_API_URL=https://meu-backend.vercel.app/api
-NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=G-seu_google_analytics_id_aqui
+NUXT_PUBLIC_EMAILJS_SERVICE_ID=seu_service_id_aqui
+NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_FOR_ME=seu_template_id_for_me_aqui
+NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_FOR_SENDER=seu_template_id_for_sender_aqui
+NUXT_PUBLIC_EMAILJS_PUBLIC_KEY=sua_public_key_aqui
 ```
 
----
-
-##### **Exemplo 2 – Aplicação Full-stack (Next.js + Prisma + PostgreSQL)**
-
-```
-DATABASE_URL=postgresql://admin:senha-super-segura@ep-meu-banco.aws.neon.tech:5432/verceldb
-NEXTAUTH_SECRET=uma_chave_muito_longa_e_segura
-NEXTAUTH_URL=https://meu-sistema.vercel.app
-```
-
----
-
-##### **Exemplo 3 – Integração com APIs externas**
-
-```
-STRIPE_SECRET_KEY=sk_live_seu_stripe_key_aqui
-OPENAI_API_KEY=sk-sua_openai_key_aqui
-SENDGRID_API_KEY=SG.sua_sendgrid_key_aqui
-```
-
----
-
-##### **Exemplo 4 – Frontend com Vite (EmailJS)**
-
-```
-VITE_EMAILJS_SERVICE_ID=seu_service_id_aqui
-VITE_EMAILJS_TEMPLATE_ID_FOR_ME=seu_template_id_for_me_aqui
-VITE_EMAILJS_TEMPLATE_ID_FOR_SENDER=seu_template_id_for_sender_aqui
-VITE_EMAILJS_PUBLIC_KEY=sua_public_key_aqui
-```
-
-> **Obs:** As variáveis de ambiente em projetos **Vite** precisam começar com `VITE_` para que o Vite as reconheça e as inclua no *bundle* do frontend; variáveis sem esse prefixo não ficam disponíveis no código do cliente.
+> **Obs:** As variáveis de ambiente em projetos **Nuxt** precisam começar com `NUXT_PUBLIC_` para que o Nuxt as reconheça e as inclua no *bundle* do frontend.
 
 ---
 
@@ -284,23 +236,14 @@ Para adicionar essas variáveis:
 1.  Acesse a página de Environment Variables do seu projeto no Vercel (ex.: `https://vercel.com/<seu-usuario>/<seu-projeto>/settings/environment-variables`)
 2.  Clique em **"Add"** para adicionar cada variável com o nome e valor correspondente.
 
-Alternativamente, se estiver desenvolvendo localmente, crie um arquivo **`.env.local`** dentro da pasta **`frontend`** do seu projeto com o seguinte conteúdo:
+Alternativamente, crie um arquivo **`.env.local`** na raiz do projeto:
 
 ```
-# Variável essencial para conectar ao Back-end Spring Boot rodando localmente (normalmente na porta 8080)
-VITE_API_URL=http://localhost:8080/api
-
-# Variáveis para integrações externas de serviço de e-mail
-VITE_EMAILJS_SERVICE_ID=seu_service_id_aqui
-VITE_EMAILJS_TEMPLATE_ID_FOR_ME=seu_template_id_for_me_aqui
-VITE_EMAILJS_TEMPLATE_ID_FOR_SENDER=seu_template_id_for_sender_aqui
-VITE_EMAILJS_PUBLIC_KEY=sua_public_key_aqui
-
-# Outras chaves de serviço
-VITE_GOOGLE_MAPS_KEY=AIzaSy...
+NUXT_PUBLIC_EMAILJS_SERVICE_ID=seu_service_id_aqui
+NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_FOR_ME=seu_template_id_for_me_aqui
+NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_FOR_SENDER=seu_template_id_for_sender_aqui
+NUXT_PUBLIC_EMAILJS_PUBLIC_KEY=sua_public_key_aqui
 ```
-
-> 💡 **Localização:** Garanta que este arquivo esteja em **`/frontend/.env.local`** para que o **Vite** consiga carregá-lo e disponibilizar as variáveis para o Front-end durante o desenvolvimento.
 
 ### 📦 Instalação de Dependências
 
@@ -315,11 +258,8 @@ cd <pasta-do-projeto>
 
 2.  **Instale as Dependências (Monorepo):**
 
-Como o projeto está dividido, você precisa instalar as dependências separadamente para o Front-end (React, usando NPM/Yarn) e garantir que o Back-end (Spring Boot, usando Maven/Gradle Wrapper) tenha suas dependências resolvidas.
 
-#### Front-end (React)
-
-Acesse a pasta do Front-end e instale as dependências do Node.js:
+#### Front-end (Nuxt)
 
 ```bash
 cd frontend
@@ -331,54 +271,22 @@ cd .. # Retorna para a raiz
 
 #### Back-end (Spring Boot)
 
-O Spring Boot utiliza o **Maven Wrapper** (`./mvnw`) ou **Gradle Wrapper** (`./gradlew`) para gerenciar dependências. Execute o comando de instalação/build limpo antes de rodar.
-
-* **Usando Maven (`pom.xml`):**
-    ```bash
-    cd backend
-    ./mvnw clean install
-    cd ..
-    ```
-
-* **Usando Gradle (`build.gradle`):**
-    ```bash
-    cd backend
-    ./gradlew clean build
-    cd ..
-    ```
+* **Usando Maven:** `cd backend && ./mvnw clean install`
+* **Usando Gradle:** `cd backend && ./gradlew clean build`
 
 ---
 
 ### 💾 Inicialização do Banco de Dados (PostgreSQL)
 
-O projeto utiliza **PostgreSQL**. A forma mais fácil de inicializar o banco é via Docker (para execução sem `docker-compose`):
-
-1. **Rode o Container do PostgreSQL:**  
-   (Certifique-se que o Docker está em execução)
-
 ```bash
 docker run --name minha_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=senha-segura-123 -e POSTGRES_DB=nome_do_banco -p 5432:5432 -d postgres:16
 ```
 
-2. **Execute as Migrações:**  
-   O Back-end **Spring Boot** geralmente gerencia o schema do banco de dados automaticamente no startup (via Hibernate `ddl-auto`) ou utilizando ferramentas como **Flyway** ou **Liquibase**.
-
-* **Se o Spring Boot gerencia o schema (padrão):** Nenhuma ação manual é necessária, basta rodar o Back-end (veja a próxima seção).
-* **Se usar Flyway/Liquibase via Maven:**
-    ```bash
-    cd backend
-    ./mvnw flyway:migrate
-    # ou
-    ./mvnw liquibase:update
-    ```
 ---
 
 ### ⚡ Como Executar a Aplicação
-Execute a aplicação em modo de desenvolvimento em **dois terminais separados**.
 
 #### Terminal 1: Back-end (Spring Boot)
-
-Inicie a API do Spring Boot. Ela tentará se conectar ao banco de dados rodando no Docker.
 
 ```bash
 cd backend
@@ -386,11 +294,7 @@ cd backend
 ```
 🚀 *O Back-end estará disponível em **http://localhost:8080**.*
 
----
-
-#### Terminal 2: Front-end (React, Vite)
-
-Inicie o servidor de desenvolvimento do Front-end.
+#### Terminal 2: Front-end (Nuxt)
 
 ```bash
 cd frontend
@@ -398,104 +302,37 @@ npm run dev
 # ou
 yarn dev
 ```
-🎨 *O Front-end estará disponível em **http://localhost:5173** (ou a porta configurada no Vite/CRA).*
 
----
-
-#### 🐳 Execução Local Completa com Docker Compose (Incluindo Banco de Dados)
-
-Para uma execução local que inclui o serviço de Back-end (**Spring Boot**), Front-end (**React**) e o banco de dados **PostgreSQL**, usaremos o **`docker-compose`** para orquestração.
-
-Antes de tudo, certifique-se de que o **Docker Desktop** (no Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
-
-- **No Mac/Windows**: basta abrir o aplicativo **Docker Desktop**.
-- **No Linux**: rode o comando abaixo para iniciar o serviço:
-
-```bash
-sudo systemctl start docker
-```
-
----
-
-#### 📦 Passos para build, inicialização e execução
-
-1. Acesse a pasta raiz do projeto (onde o arquivo `docker-compose.yml` está localizado):
-
-```bash
-cd /caminho/do/projeto/nome-do-projeto
-```
-
-2. Suba todos os serviços (Back-end, Front-end e Banco de Dados) definidos no `docker-compose.yml`:
-
-```bash
-docker-compose up --build -d
-```
-
-> [!NOTE]
-> 💡 O parâmetro `--build` garante que as imagens mais recentes do projeto sejam geradas, e `-d` executa em segundo plano.
-
-3. Verifique se os containers estão rodando:
-
-```bash
-docker ps
-```
-
-4. **Execute as Migrações do Banco de Dados:**
-   O Back-end **Spring Boot** geralmente gerencia o schema do banco de dados (via Flyway/Liquibase ou Hibernate) na **inicialização do serviço**.
-
-* **Verificação:** Se o serviço de Back-end (`backend` ou `api`) for o responsável pelas migrações, verifique os logs para confirmar se o processo foi concluído.
-    ```bash
-    docker logs <nome_do_container_backend>
-    ```
-* *Atenção:* O comando `npm run db:migrate` é exclusivo para Node.js e **não** deve ser usado.
-
-5. Abra no navegador:
-   O Front-end deve estar acessível na porta configurada no `docker-compose` (Exemplo: <http://localhost:3000> ou <http://localhost:5173>)
-
-6. Para parar e remover todos os containers, redes e volumes (exceto volumes nomeados):
-
-```bash
-docker-compose down
-```
-
-✅ **Em resumo:** Usar **`docker-compose`** simplifica a execução do ambiente completo, isolando as dependências de **Java (Spring Boot)** e **Node.js (React)** e garantindo que o PostgreSQL esteja disponível.
-
+🎨 O site estará disponível em **http://localhost:3000** (Nuxt).
 ---
 
 ## 🚀 Deploy
 Instruções claras para deploy em produção.
 
 1.  **Build do Projeto:**
-    Execute o build separadamente para os dois artefatos (JAR para o Back-end e arquivos estáticos para o Front-end).
 
 ```bash
-# 1. Build do Front-end (React/Vite) - Gera a pasta /dist com arquivos estáticos
+# 1. Build do Front-end (Nuxt) - Gera a pasta .output
 cd frontend
 npm run build
 
-# 2. Build do Back-end (Spring Boot/Maven) - Gera o arquivo .jar executável em /target
+# 2. Build do Back-end (Spring Boot/Maven) - Gera o .jar em /target
 cd ../backend
 ./mvnw clean package
 ```
 
 2.  **Configuração do Ambiente de Produção:** Defina as variáveis de ambiente no seu provedor (e.g., Vercel, Railway, Heroku, DigitalOcean).
 
-> 🔑 **Variáveis Cruciais:** Certifique-se de configurar as variáveis de **conexão com o banco de dados** (`SPRING_DATASOURCE_URL`, etc.) para o Back-end e a **URL da API de produção** (`VITE_API_URL`) para o Front-end.
+> 🔑 **Variáveis Cruciais:** Certifique-se de configurar as variáveis de **conexão com o banco de dados** (`SPRING_DATASOURCE_URL`, etc.) para o Back-end e (`NUXT_PUBLIC_API_URL`, `NUXT_PUBLIC_EMAILJS_*`) para o Front-end.
 
 3.  **Execução em Produção:**
     A forma de execução depende do seu provedor, mas geralmente envolve o seguinte:
 
 ```bash
 # ☕ Execução do Back-end Spring Boot (Java JAR)
-# Este comando inicia a API usando o artefato JAR gerado.
-java -jar backend/target/nome-do-do-projeto-0.0.1-SNAPSHOT.jar
+java -jar backend/target/nome-do-projeto-0.0.1-SNAPSHOT.jar
 
-# 🟢 Execução do Front-end (React/Vite)
-# O Front-end (arquivos estáticos) não é executado via Node, mas servido por um servidor web.
-# Exemplo de servidor de arquivos estáticos (usando Nginx, Vercel, Netlify, etc.)
-# Para simular a produção localmente ou rodar em uma VPS simples, use o pacote 'serve':
-npm install -g serve
-serve -s frontend/dist
+# 🟢 Front-end (Nuxt): npx nuxi preview ou serve -s frontend/.output/public
 ```
 
 ---
@@ -520,104 +357,71 @@ Descreva o propósito das pastas principais.
 ├── docker-compose.yml           # 🐳 Orquestração dos containers (front/back/db/etc).
 ├── docker-compose.override.yml  # 🐳 Configurações extras apenas para desenvolvimento.
 │
-├── /frontend                    # 📁 Aplicação React
+├── /frontend                    # 📁 Aplicação Nuxt (Vue 3 + Three.js)
 │   ├── .env.example             # 🧩 Variáveis de ambiente do Front-end.
-│   ├── Dockerfile               # 🐳 Docker build do Front-end.
-│   ├── .eslintrc.js             # ✨ Regras do ESLint.
-│   ├── .prettierrc              # 🎨 Configuração do Prettier.
+│   ├── nuxt.config.ts           # ⚙️ Configuração do Nuxt.
 │   ├── /public                  # 📂 Arquivos estáticos e index.html.
-│   ├── /src                     # 📂 Código-fonte React
-│   │   ├── /components          # 🧱 Componentes reutilizáveis (UI).
-│   │   ├── /pages               # 📄 Páginas/rotas da aplicação.
-│   │   ├── /services            # 🔌 Serviços e chamadas HTTP.
-│   │   ├── /hooks               # 🎣 Hooks personalizados.
-│   │   ├── /styles              # 🎨 Estilos globais, temas, Design System.
-│   │   ├── /assets              # 🖼️ Recursos estáticos importados
-│   │   │   ├── /images          # 🖼️ Imagens.
-│   │   │   ├── /icons           # 💡 Ícones.
-│   │   │   └── /fonts           # ✒️ Fontes personalizadas.
-│   │   └── /utils               # 🛠️ Funções utilitárias.
-│   ├── package.json             # 📦 Dependências e scripts.
-│   └── yarn.lock / package-lock.json # 🔒 Lockfile das dependências.
+│   ├── /components              # 🧱 Componentes Vue reutilizáveis (UI).
+│   ├── /composables             # 🎣 Composables (lógica reutilizável).
+│   ├── /layouts                 # 📐 Layouts da aplicação.
+│   ├── /pages                   # 📄 Páginas/rotas da aplicação.
+│   ├── /plugins                 # 🔌 Plugins (ex: Three.js).
+│   ├── /assets                  # 🖼️ Recursos estáticos (imagens, ícones, fontes).
+│   └── /utils                   # 🛠️ Funções utilitárias.
 │
 ├── /backend                     # 📁 Aplicação Spring Boot
 │   ├── .env.example             # 🧩 Variáveis de ambiente do Back-end.
 │   ├── Dockerfile               # 🐳 Docker build do Back-end.
-│   │
 │   ├── /src/main/java           # 📂 Código-fonte Java
-│   │   └── /com/exemplo/app
-│   │       ├── /controller      # 🎮 Endpoints REST.
-│   │       ├── /service         # ⚙️ Regras e lógica de negócio.
-│   │       ├── /repository      # 🗄️ Repositórios (JPA/Hibernate).
-│   │       ├── /model           # 🧬 Entidades persistentes (JPA).
-│   │       ├── /domain          # 🌐 Objetos de Domínio puro (sem anotações).
-│   │       ├── /dto             # ✉️ Data Transfer Objects.
-│   │       ├── /config          # 🔧 Configurações gerais (DB, Swagger, CORS, etc.).
-│   │       ├── /exception       # 💥 Exceptions e handlers globais.
-│   │       └── /security        # 🛡️ Autenticação e Autorização (Spring Security).
-│   │
 │   ├── /src/main/resources      # 📂 Recursos do Spring Boot
-│   │   ├── application.yml         # ⚙️ Configuração principal da aplicação
-│   │   ├── application-dev.yml     # 🧪 Configurações específicas do ambiente de DESENVOLVIMENTO
-│   │   ├── application-prod.yml    # 🚀 Configurações específicas para PRODUÇÃO
-│   │   ├── application-test.yml    # 🧪 Configurações usadas nos testes automatizados
-│   │   ├── /static                # 🌐 Arquivos estáticos (HTML/CSS/JS).
-│   │   ├── /templates             # 🖼️ Templates Thymeleaf/Freemarker.
-│   │   ├── /messages              # 🌎 Arquivos de internacionalização (i18n).
-│   │   └── /db                    # 💾 Scripts de banco usados pela aplicação
-│   │       └── /migration         # 📜 Migrações do banco (Flyway/Liquibase).
-│   │
-│   ├── /src/test/java            # 🧪 Testes unitários e de integração.
-│   └── pom.xml / build.gradle    # 🛠️ Build e dependências.
+│   ├── /src/test/java           # 🧪 Testes unitários e de integração.
+│   └── pom.xml / build.gradle   # 🛠️ Build e dependências.
 │
-├── /scripts                      # 📜 Scripts de automação
-│   ├── dev.sh                    # 🚀 Ambiente de desenvolvimento completo.
-│   ├── build_all.sh              # 🛠️ Build geral (front + back).
-│   └── deploy.sh                 # ☁️ Deploy em produção/homologação.
-│
-├── /docs                         # 📚 Documentação, arquitetura, modelos C4, Swagger/OpenAPI.
-└── /tests                        # 🧪 Testes End-to-End (Cypress/Playwright).
+├── /scripts                     # 📜 Scripts de automação
+├── /docs                        # 📚 Documentação, protótipos, arquitetura.
+│   └── /prototipo               # 🎨 Imagens dos protótipos (Lab01S01)
+└── /tests                       # 🧪 Testes End-to-End (Cypress/Playwright).
 ```
 
 ---
 
 ## 🎥 Demonstração
 
-Use GIFs e prints para mostrar o projeto em ação.  
+Use GIFs e prints para mostrar o projeto em ação.
 
 > [!WARNING]
 > Dê preferência a hospedar suas imagens em um **CDN** (Content Delivery Network) ou no **GitHub Pages** para garantir que elas carreguem rapidamente e não quebrem. Saiba mais sobre o GitHub Pages clicando [aqui](https://github.com/joaopauloaramuni/joaopauloaramuni.github.io).
 
-### 📱 Aplicativo Mobile
+### Protótipo (Lab01S01)
 
-- GIF de demonstração (exemplo de fluxo de usuário):  
+| Protótipo — Visão geral (Home) |
+| :---: |
+| ![Protótipo Home](./docs/prototipo/prototipo-home.png) |
+
+### 📱 Aplicativo Mobile
 
 | Demonstração 1 | Demonstração 2 | Demonstração 3 | Demonstração 4 |
 |----------------|----------------|----------------|----------------|
-| <img src="https://joaopauloaramuni.github.io/image/fundo_mobile_engsoft.jpeg" alt="Demonstração 1" height="400"> | <img src="https://joaopauloaramuni.github.io/image/fundo_mobile_engsoft.jpeg" alt="Demonstração 2" height="400"> | <img src="https://joaopauloaramuni.github.io/image/fundo_mobile_engsoft.jpeg" alt="Demonstração 3" height="400"> | <img src="https://joaopauloaramuni.github.io/image/fundo_mobile_engsoft.jpeg" alt="Demonstração 4" height="400"> |
+| | | | |
 | _Sua gif aqui_ | _Sua gif aqui_ | _Sua gif aqui_ | _Sua gif aqui_ |
-
-Para melhor visualização, as telas principais estão organizadas lado a lado.
 
 | Tela | Captura de Tela |
 | :---: | :---: |
 | **Tela Inicial (Home)** | **Tela de Perfil / Settings** |
-| <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela 1 do Mobile" width="120px" height="120px"> | <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela 2 do Mobile" width="120px" height="120px"> |
+| | |
 | **Tela de Cadastro** | **Tela de Lista / Detalhes** |
-| <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela 3 do Mobile" width="120px" height="120px"> | <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela 4 do Mobile" width="120px" height="120px"> |
+| | |
 
 ### 🌐 Aplicação Web
-
-Para melhor visualização, as telas principais estão organizadas lado a lado.
 
 | Tela | Captura de Tela |
 | :---: | :---: |
 | **Página Inicial (Home)** | **Página de Login** |
-| <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela Inicial da Aplicação Web" width="120px" height="120px"> | <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela de Login" width="120px" height="120px"> |
+| | |
 | **Cadastro de Clientes** | **Cadastro de Produtos** |
-| <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela de Cadastro de Clientes" width="120px" height="120px"> | <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela de Cadastro de Produtos" width="120px" height="120px"> |
+| | |
 | **Dashboard (Visão Geral)** | **Página Admin / Configurações** |
-| <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela de Dashboard" width="120px" height="120px"> | <img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" alt="Tela Administrativa" width="120px" height="120px"> |
+| | |
 
 ### 💻 Exemplo de Saída no Terminal (para Back-end, API, CLI)
 
@@ -625,10 +429,7 @@ Caso o projeto seja focado em serviços de Back-end (API, microserviço, CLI), u
 
 #### 1. Demonstração da API (Exemplo com cURL)
 
-Mostra uma chamada simples para um endpoint da API (ex: GET de listagem).
-
 ```bash
-# Chama o endpoint de listagem de usuários com o token de autenticação
 curl -X GET 'http://localhost:3000/api/v1/users' \
      -H 'Authorization: Bearer <seu-jwt-token>'
 ```
@@ -637,20 +438,7 @@ curl -X GET 'http://localhost:3000/api/v1/users' \
 ```json
 {
   "total": 2,
-  "users": [
-    {
-      "id": "1a2b3c",
-      "name": "Prof. Aramuni",
-      "email": "contato@exemplo.com",
-      "status": "active"
-    },
-    {
-      "id": "4d5e6f",
-      "name": "Colaborador Teste",
-      "email": "teste@exemplo.com",
-      "status": "inactive"
-    }
-  ]
+  "users": []
 }
 ```
 
@@ -658,20 +446,8 @@ curl -X GET 'http://localhost:3000/api/v1/users' \
 
 #### 2. Demonstração de Execução de CLI/Script
 
-Mostra como executar uma ferramenta de linha de comando ou um script de manutenção do projeto (ex: rodar migrações ou um job agendado).
-
 ```bash
-# Executa a ferramenta de validação de Schema
 npm run cli validate:schema --target=production
-```
-
-**Saída Esperada:**
-```text
-[INFO] Iniciando validação do banco de dados...
-[SUCCESS] 15/15 tabelas verificadas.
-[WARNING] Coluna 'descricao' na tabela 'produtos' é nullable.
-[SUCCESS] Validação concluída. Nenhum erro crítico encontrado.
-Tempo de execução: 1.25s
 ```
 
 ---
@@ -700,12 +476,11 @@ npm run test:e2e
 
 Liste aqui links para documentação técnica, referências de bibliotecas complexas ou guias de estilo que foram cruciais para o projeto.
 
-* 📖 **Framework/Biblioteca (Front-end):** [Documentação Oficial do **React**](https://react.dev/reference/react)
-* 📖 **Build Tool (Front-end):** [Guia de Configuração do **Vite**](https://vitejs.dev/config/)
-* 📖 **Framework (Back-end):** [Documentação Oficial do **Spring Boot**](https://docs.spring.io/spring-boot/docs/current/reference/html/)
-* 📖 **Containerização:** [Documentação de Referência do **Docker**](https://docs.docker.com/)
+* 📖 **Nuxt 3:** [Documentação Oficial](https://nuxt.com/docs)
+* 📖 **Vue 3:** [Documentação Oficial](https://vuejs.org/)
+* 📖 **Three.js:** [Documentação e exemplos](https://threejs.org/docs/)
 * 📖 **Guia de Estilo:** [**Conventional Commits** (Padrão de Mensagens)](https://www.conventionalcommits.org/en/v1.0.0/)
-* 📖 **Documentação Interna:** [Design System do Projeto](./docs/design-system.md)
+* 📖 **EmailJS:** [Documentação para envio de e-mail](https://www.emailjs.com/docs/)
 
 ---
 
@@ -714,8 +489,7 @@ Liste os principais contribuidores. Você pode usar links para seus perfis.
 
 | 👤 Nome | 🖼️ Foto | :octocat: GitHub | 💼 LinkedIn | 📤 Gmail |
 |---------|----------|-----------------|-------------|-----------|
-| Nome 1  | <div align="center"><img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" width="70px" height="70px"></div> | <div align="center"><a href="https://github.com/user1"><img src="https://joaopauloaramuni.github.io/image/github6.png" width="50px" height="50px"></a></div> | <div align="center"><a href="https://www.linkedin.com/in/user1"><img src="https://joaopauloaramuni.github.io/image/linkedin2.png" width="50px" height="50px"></a></div> | <div align="center"><a href="mailto:user1@gmail.com"><img src="https://joaopauloaramuni.github.io/image/gmail3.png" width="50px" height="50px"></a></div> |
-| Nome 2  | <div align="center"><img src="https://joaopauloaramuni.github.io/image/aramunilogo.png" width="70px" height="70px"></div> | <div align="center"><a href="https://github.com/user2"><img src="https://joaopauloaramuni.github.io/image/github6.png" width="50px" height="50px"></a></div> | <div align="center"><a href="https://www.linkedin.com/in/user2"><img src="https://joaopauloaramuni.github.io/image/linkedin2.png" width="50px" height="50px"></a></div> | <div align="center"><a href="mailto:user2@gmail.com"><img src="https://joaopauloaramuni.github.io/image/gmail3.png" width="50px" height="50px"></a></div> |
+| Julia Rocha Fiorini | — | [GitHub](https://github.com) | [LinkedIn](https://www.linkedin.com/in) | julia.rochafiorini@gmail.com |
 
 > [!TIP]
 > 💡 **Dica:** Escolha uma foto profissional, preferencialmente de rosto, evitando imagens com baixa qualidade, filtros excessivos ou elementos distrativos.
@@ -751,6 +525,6 @@ Gostaria de agradecer aos seguintes canais e pessoas que foram fundamentais para
 
 ## 📄 Licença
 
-Este projeto é distribuído sob a **[Licença MIT](https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software/blob/main/LICENSE)**.
+Este projeto é distribuído sob a **[Licença MIT](./LICENSE)**.
 
 ---
