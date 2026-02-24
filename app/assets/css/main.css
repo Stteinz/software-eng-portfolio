@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Portfolio theme: dark background + purple accent */
+@theme static {
+  --font-sans: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Dark background (IDE-like) */
+  --color-background: #1e1e28;
+  --color-foreground: #f8f8f2;
+  --color-muted: #a0a0a0;
+  --color-border: #44475a;
+
+  /* Purple accent */
+  --color-accent: #be84ed;
+  --color-accent-hover: #b38cd4;
+}
+
+:root {
+  --portfolio-bg: #1e1e28;
+  --portfolio-bg-elevated: #282a36;
+  --portfolio-text: #f8f8f2;
+  --portfolio-text-muted: #a0a0a0;
+  --portfolio-border: #44475a;
+  --portfolio-accent: #be84ed;
+}
+
+body {
+  background-color: var(--portfolio-bg);
+  color: var(--portfolio-text);
+}
+
+/* Section titles with # and purple underline */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.section-title .hash {
+  color: var(--portfolio-accent);
+}
+
+.section-title-underline {
+  height: 2px;
+  width: 100%;
+  max-width: 200px;
+  background: var(--portfolio-accent);
+  margin-bottom: 1.5rem;
+}
+
+/* Bordered boxes (skills, facts, quote) */
+.portfolio-box {
+  border: 1px solid var(--portfolio-border);
+  padding: 1rem 1.25rem;
+  background: rgba(40, 42, 54, 0.5);
+}
+
+/* Dot pattern decoration */
+.dot-pattern {
+  background-image: radial-gradient(circle, var(--portfolio-text-muted) 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.4;
+}
