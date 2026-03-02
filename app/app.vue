@@ -1,15 +1,16 @@
 <script setup>
-import { portfolio } from '~/data/portfolio'
+const { locale, setLocale, portfolio, ui } = usePortfolioLocale()
 
-const navItems = [
-  { id: 'home', label: '#home' },
-  { id: 'works', label: '#works' },
-  { id: 'about-me', label: '#about-me' },
-  { id: 'contacts', label: '#contacts' }
-]
+const navItems = computed(() => [
+  { id: 'home', label: ui.value.nav.home },
+  { id: 'works', label: ui.value.nav.works },
+  { id: 'about-me', label: ui.value.nav.aboutMe },
+  { id: 'experiences', label: ui.value.nav.experiences },
+  { id: 'contacts', label: ui.value.nav.contacts }
+])
 
-const title = `${portfolio.name} | ${portfolio.role}`
-const description = `Portfolio de ${portfolio.name} - ${portfolio.role}.`
+const title = computed(() => `${portfolio.value.name} | ${portfolio.value.role}`)
+const description = computed(() => `Portfolio de ${portfolio.value.name} - ${portfolio.value.role}.`)
 
 useHead({
   meta: [
@@ -22,7 +23,7 @@ useHead({
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap' }
   ],
   htmlAttrs: {
-    lang: 'pt-BR',
+    lang: computed(() => (locale.value === 'pt-BR' ? 'pt-BR' : 'en')),
     class: 'dark'
   }
 })
@@ -38,6 +39,11 @@ useSeoMeta({
 
 <template>
   <div class="min-h-screen bg-[var(--portfolio-bg)] text-[var(--portfolio-text)] font-sans">
+    <!-- Spline: fundo com linhas/3D (troque sceneUrl pela sua cena exportada do Spline) -->
+    <ClientOnly>
+      <SplineBackground :opacity="0.7" />
+    </ClientOnly>
+
     <!-- Left sidebar: fixed icons -->
     <aside class="fixed left-0 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-4 pl-3 md:pl-4">
       <a
@@ -82,7 +88,7 @@ useSeoMeta({
           <NuxtLink to="/" class="text-lg font-bold text-[var(--portfolio-text)] hover:text-[var(--portfolio-accent)] transition-colors">
             {{ portfolio.name.split(' ')[0] }}
           </NuxtLink>
-          <nav class="flex items-center gap-6">
+          <nav class="flex flex-wrap items-center gap-4 sm:gap-6">
             <a
               v-for="item in navItems"
               :key="item.id"
@@ -91,7 +97,23 @@ useSeoMeta({
             >
               {{ item.label }}
             </a>
-            <span class="text-sm text-[var(--portfolio-text-muted)] border-l border-[var(--portfolio-border)] pl-4">EN</span>
+            <div class="flex items-center gap-1 border-l border-[var(--portfolio-border)] pl-4">
+              <button
+                type="button"
+                :class="locale === 'pt-BR' ? 'text-[var(--portfolio-accent)] font-semibold' : 'text-[var(--portfolio-text-muted)] hover:text-[var(--portfolio-accent)]'"
+                @click="setLocale('pt-BR')"
+              >
+                PT
+              </button>
+              <span class="text-[var(--portfolio-text-muted)]">|</span>
+              <button
+                type="button"
+                :class="locale === 'en' ? 'text-[var(--portfolio-accent)] font-semibold' : 'text-[var(--portfolio-text-muted)] hover:text-[var(--portfolio-accent)]'"
+                @click="setLocale('en')"
+              >
+                EN
+              </button>
+            </div>
           </nav>
         </div>
       </header>
@@ -113,7 +135,7 @@ useSeoMeta({
               <span class="text-sm text-[var(--portfolio-text-muted)]">{{ portfolio.role }}</span>
             </div>
             <div>
-              <p class="text-sm font-semibold text-[var(--portfolio-text-muted)] mb-2">Media</p>
+              <p class="text-sm font-semibold text-[var(--portfolio-text-muted)] mb-2">{{ ui.media }}</p>
               <div class="flex gap-3">
                 <a :href="portfolio.links.github" target="_blank" rel="noopener" class="text-[var(--portfolio-text-muted)] hover:text-[var(--portfolio-accent)]" aria-label="GitHub">
                   <UIcon name="i-simple-icons-github" class="w-5 h-5" />
