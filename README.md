@@ -65,8 +65,8 @@
   > 💻 **Descrição:** Link para a aplicação em ambiente de produção (Ex: hospedado na Vercel, Netlify ou AWS S3).
 * 📱 **Download Mobile:** [App Store](<link-app-store>) | [Google Play](<link-google-play>) | [APK Direto](<link-para-apk-direto>)
   > 📱 **Descrição:** Links diretos para download nas lojas de aplicativos (se aplicável) e para o arquivo de instalação direta no Android (APK).
-* 📖 **Documentação:** [Leia a Wiki/Docs](<link-para-docs>)
-  > 📚 **Descrição:** Acesso à documentação técnica completa do projeto (Ex: Swagger/OpenAPI para API, ou Wiki interna).
+* 📖 **Documentação:** [docs/README.md](./docs/README.md)
+  > 📚 **Descrição:** Guias para Blender, integração 3D e estrutura do projeto.
 
 ---
 
@@ -339,48 +339,36 @@ java -jar backend/target/nome-do-projeto-0.0.1-SNAPSHOT.jar
 
 ## 📂 Estrutura de Pastas
 
-Descreva o propósito das pastas principais.
-
 ```
 .
 ├── .editorconfig                # ✍️ Padronização de estilo de código.
-├── .env.local                   # 🔒 Variáveis SENSÍVEIS do ambiente LOCAL (não versionado).
-├── .env.test                    # 🧪 Variáveis de ambiente para TESTES AUTOMATIZADOS.
-├── .env.staging                 # ☁️ Variáveis de ambiente para STAGING/HOMOLOGAÇÃO.
-├── .env.example                 # 🧩 Exemplo de TODAS as variáveis necessárias (sem valores sensíveis).
-├── .gitignore                   # 🧹 Ignora arquivos/pastas não versionadas (.env, node_modules, target, etc.).
-├── .vscode/                     # ⚙️ Configurações de ambiente da IDE (opcional).
-├── .github/                     # 🤖 CI/CD (Actions), templates de Issues e Pull Requests.
-├── README.md                    # 📘 Documentação principal do projeto.
-├── CONTRIBUTING.md              # 🤝 Guia de contribuição.
+├── .env                         # 🔒 Variáveis de ambiente (não versionado).
+├── .gitignore                   # 🧹 Ignora arquivos não versionados.
+├── .github/                     # 🤖 CI/CD (Actions).
+├── README.md                    # 📘 Documentação principal.
 ├── LICENSE                      # ⚖️ Licença do projeto.
-├── docker-compose.yml           # 🐳 Orquestração dos containers (front/back/db/etc).
-├── docker-compose.override.yml  # 🐳 Configurações extras apenas para desenvolvimento.
+├── nuxt.config.ts              # ⚙️ Configuração do Nuxt.
+├── package.json                # 📦 Dependências.
 │
-├── /frontend                    # 📁 Aplicação Nuxt (Vue 3 + Three.js)
-│   ├── .env.example             # 🧩 Variáveis de ambiente do Front-end.
-│   ├── nuxt.config.ts           # ⚙️ Configuração do Nuxt.
-│   ├── /public                  # 📂 Arquivos estáticos e index.html.
-│   ├── /components              # 🧱 Componentes Vue reutilizáveis (UI).
-│   ├── /composables             # 🎣 Composables (lógica reutilizável).
-│   ├── /layouts                 # 📐 Layouts da aplicação.
-│   ├── /pages                   # 📄 Páginas/rotas da aplicação.
-│   ├── /plugins                 # 🔌 Plugins (ex: Three.js).
-│   ├── /assets                  # 🖼️ Recursos estáticos (imagens, ícones, fontes).
-│   └── /utils                   # 🛠️ Funções utilitárias.
+├── app/                         # 📁 Aplicação Nuxt (Vue 3 + Nuxt 4)
+│   ├── assets/css/             # 🎨 Estilos globais.
+│   ├── components/              # 🧱 Componentes Vue (organizados por domínio)
+│   │   ├── base/               #     Componentes base (AppLogo, PortfolioNav).
+│   │   ├── portfolio/          #     Conteúdo do portfólio (PortfolioContent).
+│   │   └── scene/              #     Cenários 3D (Portfolio3DScene, SplineBackground).
+│   ├── composables/             # 🎣 Lógica reutilizável (usePortfolioLocale).
+│   ├── data/                    # 📋 Dados do portfólio.
+│   ├── layouts/                 # 📐 Layouts (default, embed).
+│   ├── pages/                   # 📄 Rotas (index, embed, experience).
+│   ├── app.config.ts           # ⚙️ Configuração da aplicação.
+│   └── app.vue                  # 📱 Componente raiz.
 │
-├── /backend                     # 📁 Aplicação Spring Boot
-│   ├── .env.example             # 🧩 Variáveis de ambiente do Back-end.
-│   ├── Dockerfile               # 🐳 Docker build do Back-end.
-│   ├── /src/main/java           # 📂 Código-fonte Java
-│   ├── /src/main/resources      # 📂 Recursos do Spring Boot
-│   ├── /src/test/java           # 🧪 Testes unitários e de integração.
-│   └── pom.xml / build.gradle   # 🛠️ Build e dependências.
+├── public/                      # 📂 Arquivos estáticos servidos na raiz.
+│   └── models/                 # 🎮 Modelos 3D (.glb).
 │
-├── /scripts                     # 📜 Scripts de automação
-├── /docs                        # 📚 Documentação, protótipos, arquitetura.
-│   └── /prototipo               # 🎨 Imagens dos protótipos (Lab01S01)
-└── /tests                       # 🧪 Testes End-to-End (Cypress/Playwright).
+└── docs/                        # 📚 Documentação.
+    ├── guides/                  #     Guias passo a passo (Blender, integração GLB).
+    └── prototipo/               # 🎨 Imagens dos protótipos (Lab01S01).
 ```
 
 ---

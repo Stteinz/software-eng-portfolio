@@ -22,3 +22,7 @@ logs
 .env
 .env.*
 !.env.example
+
+# Modelos 3D grandes (GitHub limita a 100MB). Use CDN ou hospede externamente.
+*.glb
+*.gltf
