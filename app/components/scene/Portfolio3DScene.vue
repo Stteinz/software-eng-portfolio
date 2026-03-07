@@ -17,13 +17,16 @@ const props = withDefaults(
     screenFlip?: boolean
     /** Ajuste de posição ao longo da normal da tela. Negativo = mais perto do monitor */
     screenNudge?: number
+    /** Multiplicador de escala da tela para preencher melhor o monitor */
+    screenScale?: number
   }>(),
   {
     modelUrl: '/models/computador-cenario.glb',
-    screenObjectName: 'Screen',
+    screenObjectName: 'screen',
     embedUrl: '',
     screenFlip: false,
-    screenNudge: -0.02
+    screenNudge: -0.02,
+    screenScale: 1.0
   }
 )
 
@@ -31,6 +34,28 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 const containerRef = ref<HTMLDivElement | null>(null)
 const isLoaded = ref(false)
 const errorMessage = ref('')
+
+const cleanupState = ref<{
+  onResize: () => void
+  frameRef: { current: number }
+  renderer: { dispose: () => void }
+  container: HTMLDivElement
+  cssDomElement: HTMLDivElement
+} | null>(null)
+
+onUnmounted(() => {
+  const s = cleanupState.value
+  if (s) {
+    window.removeEventListener('resize', s.onResize)
+    cancelAnimationFrame(s.frameRef.current)
+    s.renderer.dispose()
+    try {
+      s.container.removeChild(s.cssDomElement)
+    } catch {
+      /* já removido */
+    }
+  }
+})
 
 onMounted(async () => {
   const canvas = canvasRef.value
@@ -58,6 +83,7 @@ onMounted(async () => {
     cssRenderer.domElement.style.position = 'absolute'
     cssRenderer.domElement.style.top = '0'
     cssRenderer.domElement.style.left = '0'
+    cssRenderer.domElement.style.zIndex = '1'
     cssRenderer.domElement.style.pointerEvents = 'none'
     container.appendChild(cssRenderer.domElement)
 
@@ -79,10 +105,23 @@ onMounted(async () => {
     const model = gltf.scene
     scene.add(model)
 
+    const modelBox = new THREE.Box3().setFromObject(model)
+    const modelCenter = new THREE.Vector3()
+    const modelSize = new THREE.Vector3()
+    modelBox.getCenter(modelCenter)
+    modelBox.getSize(modelSize)
+
+    const maxDim = Math.max(modelSize.x, modelSize.y, modelSize.z)
+    camera.position.copy(modelCenter).add(new THREE.Vector3(0, 0, maxDim * 1.5))
+    controls.target.copy(modelCenter)
+    controls.update()
+
     const cssScene = new THREE.Scene()
+    const targetName = (props.screenObjectName || 'screen').toLowerCase()
     let screenMesh: THREE.Mesh | null = null
+
     model.traverse((obj) => {
-      if (obj.name === props.screenObjectName && obj instanceof THREE.Mesh) {
+      if (!screenMesh && obj instanceof THREE.Mesh && obj.name.toLowerCase() === targetName) {
         screenMesh = obj
       }
     })
@@ -93,6 +132,85 @@ onMounted(async () => {
       errorMessage.value = `Objeto "${props.screenObjectName}" não encontrado. Objetos no modelo: ${names.join(', ') || '(nenhum nomeado)'}`
       console.warn('[Portfolio3DScene] Objetos disponíveis:', names)
     } else {
+      screenMesh.updateWorldMatrix(true, false)
+      if (!screenMesh.geometry.boundingBox) {
+        screenMesh.geometry.computeBoundingBox()
+      }
+
+      const localBox = screenMesh.geometry.boundingBox?.clone()
+      if (!localBox) {
+        errorMessage.value = 'Nao foi possivel calcular a geometria da tela.'
+        return
+      }
+
+      const localCenter = localBox.getCenter(new THREE.Vector3())
+      const localSize = localBox.getSize(new THREE.Vector3())
+      const worldScale = screenMesh.getWorldScale(new THREE.Vector3())
+      const localAxes = [
+        { key: 'x', size: localSize.x, direction: new THREE.Vector3(1, 0, 0) },
+        { key: 'y', size: localSize.y, direction: new THREE.Vector3(0, 1, 0) },
+        { key: 'z', size: localSize.z, direction: new THREE.Vector3(0, 0, 1) }
+      ].sort((a, b) => a.size - b.size)
+
+      const normalAxis = localAxes[0]
+      const planeAxes = localAxes.slice(1)
+      const screenCenter = localCenter.clone().applyMatrix4(screenMesh.matrixWorld)
+      let normalWorld = normalAxis.direction.clone().applyQuaternion(screenMesh.getWorldQuaternion(new THREE.Quaternion())).normalize()
+
+      const fromModelCenter = screenCenter.clone().sub(modelCenter).normalize()
+      if (normalWorld.dot(fromModelCenter) < 0) {
+        normalWorld.multiplyScalar(-1)
+      }
+
+      const worldUp = new THREE.Vector3(0, 1, 0)
+      const planeAxisCandidates = planeAxes.map((axis) => ({
+        ...axis,
+        worldDirection: axis.direction.clone().applyQuaternion(screenMesh.getWorldQuaternion(new THREE.Quaternion())).normalize()
+      }))
+
+      let verticalAxis = planeAxisCandidates[0]
+      let horizontalAxis = planeAxisCandidates[1]
+      if (Math.abs(planeAxisCandidates[1].worldDirection.dot(worldUp)) > Math.abs(planeAxisCandidates[0].worldDirection.dot(worldUp))) {
+        verticalAxis = planeAxisCandidates[1]
+        horizontalAxis = planeAxisCandidates[0]
+      }
+
+      let verticalWorld = verticalAxis.worldDirection.clone()
+      if (verticalWorld.dot(worldUp) < 0) {
+        verticalWorld.multiplyScalar(-1)
+      }
+
+      let horizontalWorld = horizontalAxis.worldDirection.clone()
+      if (horizontalWorld.clone().cross(verticalWorld).dot(normalWorld) < 0) {
+        horizontalWorld.multiplyScalar(-1)
+      }
+
+      const toCamera = camera.position.clone().sub(screenCenter).normalize()
+      const shouldFlipToCamera = normalWorld.dot(toCamera) < 0
+      if (shouldFlipToCamera) {
+        normalWorld.multiplyScalar(-1)
+        horizontalWorld.multiplyScalar(-1)
+      }
+
+      if (props.screenFlip) {
+        normalWorld.multiplyScalar(-1)
+        horizontalWorld.multiplyScalar(-1)
+      }
+
+      const getAxisWorldScale = (axisKey: 'x' | 'y' | 'z') => {
+        if (axisKey === 'x') return worldScale.x
+        if (axisKey === 'y') return worldScale.y
+        return worldScale.z
+      }
+
+      const width = horizontalAxis.size * getAxisWorldScale(horizontalAxis.key)
+      const height = verticalAxis.size * getAxisWorldScale(verticalAxis.key)
+
+      console.log('[Portfolio3DScene] Tela selecionada:', {
+        name: screenMesh.name || '(sem nome)',
+        width,
+        height
+      })
       screenMesh.visible = false
       const embedUrl = props.embedUrl || `${window.location.origin}/embed`
       const iframe = document.createElement('iframe')
@@ -106,45 +224,21 @@ onMounted(async () => {
       const css3dObject = new CSS3DObject(iframe)
       css3dObject.element.style.pointerEvents = 'auto'
 
-      screenMesh.updateWorldMatrix(true, false)
-      const worldPos = new THREE.Vector3()
-      const worldQuat = new THREE.Quaternion()
-      const worldScale = new THREE.Vector3()
-      screenMesh.getWorldPosition(worldPos)
-      screenMesh.getWorldQuaternion(worldQuat)
-      screenMesh.getWorldScale(worldScale)
-
-      const box = new THREE.Box3().setFromObject(screenMesh)
-      const size = new THREE.Vector3()
-      box.getSize(size)
-
-      const normal = new THREE.Vector3(0, 0, 1).applyQuaternion(worldQuat)
       const nudge = props.screenNudge ?? -0.02
-      worldPos.add(normal.clone().multiplyScalar(nudge))
+      const worldPos = screenCenter.clone().add(normalWorld.clone().multiplyScalar(nudge))
 
+      const basis = new THREE.Matrix4().makeBasis(horizontalWorld, verticalWorld, normalWorld)
       css3dObject.position.copy(worldPos)
-      css3dObject.quaternion.copy(worldQuat)
-      if (props.screenFlip) {
-        css3dObject.rotateY(Math.PI)
-      }
-      const scaleX = size.x / 1920
-      const scaleY = size.y / 1080
-      css3dObject.scale.set(scaleX, scaleY, 0.001)
+      css3dObject.quaternion.setFromRotationMatrix(basis)
+      const scaleMultiplier = props.screenScale ?? 1.0
+      const scaleX = (width * scaleMultiplier) / 1920
+      const scaleY = (height * scaleMultiplier) / 1080
+      css3dObject.scale.set(-scaleX, scaleY, 0.001)
 
       iframe.style.transform = 'translate(-50%, -50%)'
 
       cssScene.add(css3dObject)
     }
-
-    const box3 = new THREE.Box3().setFromObject(model)
-    const center = new THREE.Vector3()
-    const size2 = new THREE.Vector3()
-    box3.getCenter(center)
-    box3.getSize(size2)
-    const maxDim = Math.max(size2.x, size2.y, size2.z)
-    camera.position.copy(center).add(new THREE.Vector3(0, 0, maxDim * 1.5))
-    controls.target.copy(center)
-    controls.update()
 
     isLoaded.value = true
 
@@ -158,9 +252,9 @@ onMounted(async () => {
       cssRenderer.setSize(w, h)
     }
 
-    let frameId: number
+    const frameRef = { current: 0 }
     function animate () {
-      frameId = requestAnimationFrame(animate)
+      frameRef.current = requestAnimationFrame(animate)
       controls.update()
       renderer.render(scene, camera)
       cssRenderer.render(cssScene, camera)
@@ -169,12 +263,13 @@ onMounted(async () => {
 
     window.addEventListener('resize', onResize)
 
-    onUnmounted(() => {
-      window.removeEventListener('resize', onResize)
-      cancelAnimationFrame(frameId)
-      renderer.dispose()
-      container?.removeChild(cssRenderer.domElement)
-    })
+    cleanupState.value = {
+      onResize,
+      frameRef,
+      renderer,
+      container,
+      cssDomElement: cssRenderer.domElement
+    }
   } catch (e) {
     console.error('[Portfolio3DScene]', e)
     const msg = e instanceof Error ? e.message : String(e)

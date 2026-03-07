@@ -1,12 +1,14 @@
 <script setup lang="ts">
 /**
  * Experiência 3D: modelo GLB com portfólio na tela do computador.
- * Coloque seu arquivo .glb em public/models/ e nomeie o mesh da tela como "Screen" no Blender.
+ * Usa layout embed (sem Spline) para evitar múltiplas instâncias do Three.js.
  */
+definePageMeta({ layout: 'embed' })
+
 const config = useRuntimeConfig().public as { glbModelUrl?: string; screenObjectName?: string; screenFlip?: boolean; screenNudge?: number }
 
 const modelUrl = computed(() => config.glbModelUrl || '/models/computador-cenario.glb')
-const screenObjectName = computed(() => config.screenObjectName || 'Screen')
+const screenObjectName = computed(() => config.screenObjectName || 'screen')
 const screenFlip = computed(() => config.screenFlip ?? false)
 const screenNudge = computed(() => config.screenNudge ?? -0.02)
 </script>
