@@ -32,8 +32,8 @@ export default defineNuxtConfig({
       screenObjectName: process.env.NUXT_PUBLIC_SCREEN_OBJECT_NAME || 'screen',
       /** true = girar a tela 180° (se o portfólio aparecer de costas) */
       screenFlip: process.env.NUXT_PUBLIC_SCREEN_FLIP === 'true',
-      /** Ajuste fino da posição: empurra a tela ao longo da normal. Positivo=para frente, negativo=para trás (em direção ao monitor) */
-      screenNudge: Number(process.env.NUXT_PUBLIC_SCREEN_NUDGE ?? -0.02)
+      /** Ajuste fino da posição da tela 3D. Positivo=mais para dentro do monitor, negativo=mais para fora. */
+      screenNudge: Number(process.env.NUXT_PUBLIC_SCREEN_NUDGE ?? 0.5)
     }
   },
 

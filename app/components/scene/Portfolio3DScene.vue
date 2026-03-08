@@ -15,18 +15,21 @@ const props = withDefaults(
     embedUrl?: string
     /** Girar a tela 180° (use se o portfólio aparecer "de costas") */
     screenFlip?: boolean
-    /** Ajuste de posição ao longo da normal da tela. Negativo = mais perto do monitor */
+    /** Deslocamento linear da tela: negativo=frente, positivo=tras */
     screenNudge?: number
     /** Multiplicador de escala da tela para preencher melhor o monitor */
     screenScale?: number
+    /** Inclinacao da tela em radianos para acompanhar o monitor */
+    screenTilt?: number
   }>(),
   {
     modelUrl: '/models/computador-cenario.glb',
     screenObjectName: 'screen',
     embedUrl: '',
     screenFlip: false,
-    screenNudge: -0.02,
-    screenScale: 1.0
+    screenNudge: 0.5,
+    screenScale: 1.0,
+    screenTilt: 0.18
   }
 )
 
@@ -119,10 +122,15 @@ onMounted(async () => {
     const cssScene = new THREE.Scene()
     const targetName = (props.screenObjectName || 'screen').toLowerCase()
     let screenMesh: THREE.Mesh | null = null
+    let computerMesh: THREE.Mesh | null = null
 
     model.traverse((obj) => {
       if (!screenMesh && obj instanceof THREE.Mesh && obj.name.toLowerCase() === targetName) {
         screenMesh = obj
+      }
+
+      if (!computerMesh && obj instanceof THREE.Mesh && obj.name.toLowerCase().includes('computador')) {
+        computerMesh = obj
       }
     })
 
@@ -197,6 +205,10 @@ onMounted(async () => {
         horizontalWorld.multiplyScalar(-1)
       }
 
+      const tilt = props.screenTilt ?? 0.14
+      verticalWorld.applyAxisAngle(horizontalWorld, tilt)
+      normalWorld.applyAxisAngle(horizontalWorld, tilt)
+
       const getAxisWorldScale = (axisKey: 'x' | 'y' | 'z') => {
         if (axisKey === 'x') return worldScale.x
         if (axisKey === 'y') return worldScale.y
@@ -205,11 +217,14 @@ onMounted(async () => {
 
       const width = horizontalAxis.size * getAxisWorldScale(horizontalAxis.key)
       const height = verticalAxis.size * getAxisWorldScale(verticalAxis.key)
+      const depth = normalAxis.size * getAxisWorldScale(normalAxis.key)
+      const pushInsideDirection = modelCenter.clone().sub(screenCenter).normalize()
 
       console.log('[Portfolio3DScene] Tela selecionada:', {
         name: screenMesh.name || '(sem nome)',
         width,
-        height
+        height,
+        depth
       })
       screenMesh.visible = false
       const embedUrl = props.embedUrl || `${window.location.origin}/embed`
@@ -224,8 +239,9 @@ onMounted(async () => {
       const css3dObject = new CSS3DObject(iframe)
       css3dObject.element.style.pointerEvents = 'auto'
 
-      const nudge = props.screenNudge ?? -0.02
-      const worldPos = screenCenter.clone().add(normalWorld.clone().multiplyScalar(nudge))
+      const inset = props.screenNudge ?? 0.5
+      const fittedScreenPos = screenCenter.clone().sub(normalWorld.clone().multiplyScalar(depth * 0.25))
+      const worldPos = fittedScreenPos.add(pushInsideDirection.multiplyScalar(inset))
 
       const basis = new THREE.Matrix4().makeBasis(horizontalWorld, verticalWorld, normalWorld)
       css3dObject.position.copy(worldPos)
