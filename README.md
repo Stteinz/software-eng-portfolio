@@ -12,13 +12,13 @@
     </td>
     <td>
       <div>
-        <img src="./docs/prototipo/prototipo-home.png" alt="Logo/Protótipo do Portfólio" width="120px" onerror="this.style.display='none'"/>
+        <img src="./web/docs/prototipo/prototipo-home.png" alt="Logo/Protótipo do Portfólio" width="120px" onerror="this.style.display='none'"/>
       </div>
     </td>
   </tr> 
 </table>
 
-> 💡 **Lab01S01:** `docs/prototipo/prototipo-home.png` 
+> 💡 **Lab01S01:** `web/docs/prototipo/prototipo-home.png` 
 
 ---
 
@@ -65,7 +65,7 @@
   > 💻 **Descrição:** Link para a aplicação em ambiente de produção (Ex: hospedado na Vercel, Netlify ou AWS S3).
 * 📱 **Download Mobile:** [App Store](<link-app-store>) | [Google Play](<link-google-play>) | [APK Direto](<link-para-apk-direto>)
   > 📱 **Descrição:** Links diretos para download nas lojas de aplicativos (se aplicável) e para o arquivo de instalação direta no Android (APK).
-* 📖 **Documentação:** [docs/README.md](./docs/README.md)
+* 📖 **Documentação:** [web/docs/README.md](./web/docs/README.md)
   > 📚 **Descrição:** Guias para Blender, integração 3D e estrutura do projeto.
 
 ---
@@ -86,7 +86,7 @@ O protótipo foi desenvolvido com média fidelidade no Figma, contemplando as se
 
 | Protótipo — Visão Geral (Home) |
 | :---: |
-| ![Protótipo Home](./docs/prototipo/prototipo-home.png) |
+| ![Protótipo Home](./web/docs/prototipo/prototipo-home.png) |
 
 **Elementos do protótipo:**
 - **Cabeçalho e navegação:** Logo, menu (Home, Works, About-me, Contacts), seletor de idioma (PT/EN)
@@ -96,7 +96,7 @@ O protótipo foi desenvolvido com média fidelidade no Figma, contemplando as se
 - **#about-me:** Texto de apresentação em inglês (Lab01S02 adicionará versão PT)
 - **#contacts:** E-mail, mensagem convidando ao contato
 
-> imagem do protótipo em `docs/prototipo/prototipo-home.png`
+> imagem do protótipo em `web/docs/prototipo/prototipo-home.png`
 
 ---
 
@@ -236,7 +236,7 @@ Para adicionar essas variáveis:
 1.  Acesse a página de Environment Variables do seu projeto no Vercel (ex.: `https://vercel.com/<seu-usuario>/<seu-projeto>/settings/environment-variables`)
 2.  Clique em **"Add"** para adicionar cada variável com o nome e valor correspondente.
 
-Alternativamente, crie um arquivo **`.env.local`** na raiz do projeto:
+Alternativamente, crie um arquivo **`.env.local`** na pasta `web/`:
 
 ```
 NUXT_PUBLIC_EMAILJS_SERVICE_ID=seu_service_id_aqui
@@ -256,23 +256,12 @@ git clone <URL_DO_SEU_REPOSITÓRIO>
 cd <pasta-do-projeto>
 ```
 
-2.  **Instale as Dependências (Monorepo):**
-
-
-#### Front-end (Nuxt)
+2.  **Instale as Dependências:**
 
 ```bash
-cd frontend
-npm install
-# ou
-yarn install
-cd .. # Retorna para a raiz
+pnpm install
+# Ou, se quiser instalar só na pasta web: cd web && pnpm install
 ```
-
-#### Back-end (Spring Boot)
-
-* **Usando Maven:** `cd backend && ./mvnw clean install`
-* **Usando Gradle:** `cd backend && ./gradlew clean build`
 
 ---
 
@@ -297,10 +286,8 @@ cd backend
 #### Terminal 2: Front-end (Nuxt)
 
 ```bash
-cd frontend
-npm run dev
-# ou
-yarn dev
+pnpm run dev
+# Ou: cd web && pnpm run dev
 ```
 
 🎨 O site estará disponível em **http://localhost:3000** (Nuxt).
@@ -312,13 +299,10 @@ Instruções claras para deploy em produção.
 1.  **Build do Projeto:**
 
 ```bash
-# 1. Build do Front-end (Nuxt) - Gera a pasta .output
-cd frontend
-npm run build
-
-# 2. Build do Back-end (Spring Boot/Maven) - Gera o .jar em /target
-cd ../backend
-./mvnw clean package
+# Build do Front-end (Nuxt) - Gera a pasta .output
+cd web
+pnpm run build
+# ou npm run build
 ```
 
 2.  **Configuração do Ambiente de Produção:** Defina as variáveis de ambiente no seu provedor (e.g., Vercel, Railway, Heroku, DigitalOcean).
@@ -332,7 +316,7 @@ cd ../backend
 # ☕ Execução do Back-end Spring Boot (Java JAR)
 java -jar backend/target/nome-do-projeto-0.0.1-SNAPSHOT.jar
 
-# 🟢 Front-end (Nuxt): npx nuxi preview ou serve -s frontend/.output/public
+# 🟢 Front-end (Nuxt): npx nuxi preview ou serve -s web/.output/public
 ```
 
 ---
@@ -341,34 +325,30 @@ java -jar backend/target/nome-do-projeto-0.0.1-SNAPSHOT.jar
 
 ```
 .
-├── .editorconfig                # ✍️ Padronização de estilo de código.
-├── .env                         # 🔒 Variáveis de ambiente (não versionado).
-├── .gitignore                   # 🧹 Ignora arquivos não versionados.
 ├── .github/                     # 🤖 CI/CD (Actions).
+├── .gitignore                   # 🧹 Ignora arquivos não versionados.
 ├── README.md                    # 📘 Documentação principal.
 ├── LICENSE                      # ⚖️ Licença do projeto.
-├── nuxt.config.ts              # ⚙️ Configuração do Nuxt.
-├── package.json                # 📦 Dependências.
 │
-├── app/                         # 📁 Aplicação Nuxt (Vue 3 + Nuxt 4)
-│   ├── assets/css/             # 🎨 Estilos globais.
-│   ├── components/              # 🧱 Componentes Vue (organizados por domínio)
-│   │   ├── base/               #     Componentes base (AppLogo, PortfolioNav).
-│   │   ├── portfolio/          #     Conteúdo do portfólio (PortfolioContent).
-│   │   └── scene/              #     Cenários 3D (Portfolio3DScene, SplineBackground).
-│   ├── composables/             # 🎣 Lógica reutilizável (usePortfolioLocale).
-│   ├── data/                    # 📋 Dados do portfólio.
-│   ├── layouts/                 # 📐 Layouts (default, embed).
-│   ├── pages/                   # 📄 Rotas (index, embed, experience).
-│   ├── app.config.ts           # ⚙️ Configuração da aplicação.
-│   └── app.vue                  # 📱 Componente raiz.
-│
-├── public/                      # 📂 Arquivos estáticos servidos na raiz.
-│   └── models/                 # 🎮 Modelos 3D (.glb).
-│
-└── docs/                        # 📚 Documentação.
-    ├── guides/                  #     Guias passo a passo (Blender, integração GLB).
-    └── prototipo/               # 🎨 Imagens dos protótipos (Lab01S01).
+└── web/                         # 📁 Aplicação Nuxt (Vue 3 + Nuxt 4)
+    ├── .editorconfig            # ✍️ Padronização de estilo de código.
+    ├── nuxt.config.ts           # ⚙️ Configuração do Nuxt.
+    ├── package.json             # 📦 Dependências.
+    │
+    ├── app/                     # 📁 Aplicação Nuxt
+    │   ├── assets/css/          # 🎨 Estilos globais.
+    │   ├── components/          # 🧱 Componentes Vue (base, portfolio, scene).
+    │   ├── composables/         # 🎣 Lógica reutilizável.
+    │   ├── data/                # 📋 Dados do portfólio.
+    │   ├── layouts/             # 📐 Layouts (default, embed).
+    │   ├── pages/               # 📄 Rotas (index, embed, experience).
+    │   └── app.vue              # 📱 Componente raiz.
+    │
+    ├── public/                  # 📂 Arquivos estáticos.
+    │   └── models/              # 🎮 Modelos 3D (.glb).
+    │
+    └── docs/                    # 📚 Documentação e protótipos.
+        └── prototipo/           # 🎨 Imagens dos protótipos (Lab01S01).
 ```
 
 ---
@@ -384,7 +364,7 @@ Use GIFs e prints para mostrar o projeto em ação.
 
 | Protótipo — Visão geral (Home) |
 | :---: |
-| ![Protótipo Home](./docs/prototipo/prototipo-home.png) |
+| ![Protótipo Home](./web/docs/prototipo/prototipo-home.png) |
 
 ### 📱 Aplicativo Mobile
 

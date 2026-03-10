@@ -27,9 +27,37 @@ I enjoy building reliable systems and automating workflows. Always learning and 
     { name: 'Frameworks', items: ['React', 'Node'] }
   ],
   projects: [
-    { name: 'Game Hub', description: 'HTML CSS Java SpringBoot Javascript', liveUrl: 'https://github.com/Stteinz/ti2-jogos', repoUrl: 'https://github.com/Stteinz/ti2-jogos', year: '2025' },
-    { name: 'Gerenciador Hackaton', description: 'Project management for hackathons', liveUrl: 'https://github.com/Stteinz/Projeto-Programacao-Modular', repoUrl: 'https://github.com/Stteinz/Projeto-Programacao-Modular', year: '2025' },
-    { name: 'Estudos DevOps', description: 'DevOps practices and tutorials', liveUrl: 'https://github.com/Stteinz/linux-foundations-devops', repoUrl: 'https://github.com/Stteinz/linux-foundations-devops', year: '2025' }
+    {
+      name: 'Game Hub',
+      description: 'Platform for searching games, ratings and user profiles.',
+      details: `The project consists of developing a gaming platform that allows users to search for titles, rate games and interact with the site. The platform will include a registration system, enabling each user to have a personalized profile to record their preferences and track their ratings.
+
+Additionally, the interface will be designed to offer an intuitive and dynamic experience, facilitating navigation and game search. The goal is to create an interactive environment where players can discover new titles, share opinions and contribute to building a collaborative catalog of ratings and recommendations.`,
+      technologies: 'HTML, CSS, JavaScript, Java Spring Boot',
+      liveUrl: 'https://github.com/Stteinz/ti2-jogos',
+      repoUrl: 'https://github.com/Stteinz/ti2-jogos',
+      year: '2025'
+    },
+    {
+      name: 'Gerenciador Hackaton',
+      description: 'Project management for hackathons',
+      details: `This project simulates a system to manage hackathons promoted annually by universities. It was developed with a focus on managing teams, projects, presentations and judging panels, using a well-defined class structure and object-oriented best practices, such as the use of the Singleton pattern.`,
+      technologies: 'Java',
+      liveUrl: 'https://github.com/Stteinz/Projeto-Programacao-Modular',
+      repoUrl: 'https://github.com/Stteinz/Projeto-Programacao-Modular',
+      year: '2025'
+    },
+    {
+      name: 'Estudos DevOps',
+      description: 'DevOps practices and tutorials',
+      details: `Hands-on technical laboratory focused on building strong Linux fundamentals for DevOps and Platform Engineering roles.
+
+This repository emphasizes practical command usage, clear documentation, and reproducible workflows following an Infrastructure as Code mindset.`,
+      technologies: 'Linux commands',
+      liveUrl: 'https://github.com/Stteinz/linux-foundations-devops',
+      repoUrl: 'https://github.com/Stteinz/linux-foundations-devops',
+      year: '2025'
+    }
   ],
   experiences: [
     { type: 'education', title: 'Software Engineering', subtitle: 'PUC Minas', period: '2023 – present', description: 'Bachelor\'s degree in Software Engineering.' },
@@ -93,9 +121,37 @@ Gosto de construir sistemas confiáveis e automatizar fluxos de trabalho. Sempre
     { name: 'Frameworks', items: ['React', 'Node'] }
   ],
   projects: [
-    { name: 'Game Hub', description: 'HTML CSS Java SpringBoot Javascript', liveUrl: 'https://github.com/Stteinz/ti2-jogos', repoUrl: 'https://github.com/Stteinz/ti2-jogos', year: '2025' },
-    { name: 'Gerenciador Hackaton', description: 'Gestão de projetos para hackathons', liveUrl: 'https://github.com/Stteinz/Projeto-Programacao-Modular', repoUrl: 'https://github.com/Stteinz/Projeto-Programacao-Modular', year: '2025' },
-    { name: 'Estudos DevOps', description: 'Práticas e tutoriais de DevOps', liveUrl: 'https://github.com/Stteinz/linux-foundations-devops', repoUrl: 'https://github.com/Stteinz/linux-foundations-devops', year: '2025' }
+    {
+      name: 'Game Hub',
+      description: 'Plataforma de busca de jogos, avaliações e perfis.',
+      details: `O projeto consiste no desenvolvimento de uma plataforma de jogos que permite aos usuários pesquisar títulos, avaliar os jogos e interagir com o site. A plataforma contará com um sistema de cadastro, possibilitando que cada usuário tenha um perfil personalizado para registrar suas preferências e acompanhar suas avaliações.
+
+Além disso, a interface será projetada para oferecer uma experiência intuitiva e dinâmica, facilitando a navegação e a busca por jogos. O objetivo é criar um ambiente interativo onde os jogadores possam descobrir novos títulos, compartilhar opiniões e contribuir para a construção de um acervo colaborativo de avaliações e recomendações.`,
+      technologies: 'HTML, CSS, JavaScript, Java Spring Boot',
+      liveUrl: 'https://github.com/Stteinz/ti2-jogos',
+      repoUrl: 'https://github.com/Stteinz/ti2-jogos',
+      year: '2025'
+    },
+    {
+      name: 'Gerenciador Hackaton',
+      description: 'Gestão de projetos para hackathons',
+      details: `Este projeto simula um sistema para gerenciar hackathons promovidos anualmente por universidades. Ele foi desenvolvido com foco em gerenciar equipes, projetos, apresentações e bancas avaliadoras, utilizando uma estrutura de classes bem definida e boas práticas de orientação a objetos, como o uso do padrão Singleton.`,
+      technologies: 'Java',
+      liveUrl: 'https://github.com/Stteinz/Projeto-Programacao-Modular',
+      repoUrl: 'https://github.com/Stteinz/Projeto-Programacao-Modular',
+      year: '2025'
+    },
+    {
+      name: 'Estudos DevOps',
+      description: 'Práticas e tutoriais de DevOps',
+      details: `Hands-on technical laboratory focused on building strong Linux fundamentals for DevOps and Platform Engineering roles.
+
+This repository emphasizes practical command usage, clear documentation, and reproducible workflows following an Infrastructure as Code mindset.`,
+      technologies: 'Comandos Linux',
+      liveUrl: 'https://github.com/Stteinz/linux-foundations-devops',
+      repoUrl: 'https://github.com/Stteinz/linux-foundations-devops',
+      year: '2025'
+    }
   ],
   experiences: [
     { type: 'education', title: 'Engenharia de Software', subtitle: 'PUC Minas', period: '2023 – atual', description: 'Graduação em Engenharia de Software.' },
@@ -153,7 +209,10 @@ export const uiStrings = {
     required: 'Obrigatório',
     invalidEmail: 'E-mail inválido',
     formSuccess: 'Mensagem enviada! Em breve respondo.',
-    formError: 'Erro ao enviar. Tente novamente ou use o e-mail abaixo.'
+    formError: 'Erro ao enviar. Tente novamente ou use o e-mail abaixo.',
+    viewRepo: 'Ver repositório',
+    viewLive: 'Ver demonstração',
+    close: 'Fechar'
   },
   en: {
     nav: { home: 'Home', works: 'Projects', aboutMe: 'About me', experiences: 'Experiences', contacts: 'Contacts' },
@@ -179,7 +238,10 @@ export const uiStrings = {
     required: 'Required',
     invalidEmail: 'Invalid email',
     formSuccess: 'Message sent! I\'ll get back to you soon.',
-    formError: 'Failed to send. Try again or use the email below.'
+    formError: 'Failed to send. Try again or use the email below.',
+    viewRepo: 'View repository',
+    viewLive: 'View demo',
+    close: 'Close'
   }
 } as const
 

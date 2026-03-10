@@ -3,16 +3,28 @@
  * Conteúdo principal do portfólio (seções, formulário).
  * Usado em index.vue e embed.vue (iframe na tela 3D).
  */
-const { portfolio, ui } = usePortfolioLocale()
-const route = useRoute()
-const showHeroSpline = computed(() => route.path === '/')
-const heroSplineUrl = 'https://app.spline.design/file/f836eb00-71dc-4f52-81eb-82f9ae899c02'
-
 const config = useRuntimeConfig().public as {
   emailjsPublicKey?: string
   emailjsServiceId?: string
   emailjsTemplateId?: string
 }
+const { locale, portfolio, ui } = usePortfolioLocale()
+const route = useRoute()
+const showHeroSpline = computed(() => route.path === '/')
+
+const modalOpen = ref(false)
+const selectedProject = ref<{ name: string; description: string; details?: string; technologies?: string; year: string; repoUrl?: string; liveUrl?: string } | null>(null)
+
+function openProjectModal (project: { name: string; description: string; details?: string; technologies?: string; year: string; repoUrl?: string; liveUrl?: string }) {
+  selectedProject.value = project
+  modalOpen.value = true
+}
+
+function closeProjectModal () {
+  modalOpen.value = false
+  selectedProject.value = null
+}
+
 const emailjsConfig = {
   publicKey: config.emailjsPublicKey || '',
   serviceId: config.emailjsServiceId || '',
@@ -112,22 +124,22 @@ async function onSubmit () {
         </div>
         <div class="relative">
           <div class="aspect-square max-w-md mx-auto relative">
-            <div class="absolute inset-0 rounded-lg border-2 border-[var(--portfolio-accent)] transform rotate-[-2deg] scale-[0.95]" />
+            <div class="absolute inset-0 rounded-lg border-2 border-[var(--portfolio-accent)] transform rotate-[-2deg] scale-[0.95] pointer-events-none" aria-hidden="true" />
             <div class="absolute inset-0 overflow-hidden rounded-lg border border-[var(--portfolio-border)] bg-[var(--portfolio-bg-elevated)]">
-              <iframe
-                v-if="showHeroSpline"
-                :src="heroSplineUrl"
-                title="Cubo 3D"
-                loading="lazy"
-                class="w-full h-full"
-                frameborder="0"
-              />
+              <ClientOnly v-if="showHeroSpline">
+                <SplineHeroBox />
+                <template #fallback>
+                  <div class="flex items-center justify-center w-full h-full min-h-[280px]">
+                    <UIcon name="i-lucide-loader-2" class="w-8 h-8 animate-spin text-[var(--portfolio-text-muted)]" />
+                  </div>
+                </template>
+              </ClientOnly>
               <div v-else class="flex items-center justify-center w-full h-full">
                 <UIcon name="i-lucide-user" class="w-24 h-24 text-[var(--portfolio-text-muted)]" />
               </div>
             </div>
-            <div class="absolute -top-2 -right-2 w-8 h-8 dot-pattern rounded" />
-            <div class="absolute -bottom-2 -left-2 w-6 h-6 dot-pattern rounded" />
+            <div class="absolute -top-2 -right-2 w-8 h-8 dot-pattern rounded pointer-events-none" aria-hidden="true" />
+            <div class="absolute -bottom-2 -left-2 w-6 h-6 dot-pattern rounded pointer-events-none" aria-hidden="true" />
           </div>
           <div class="mt-6 flex items-center gap-2 px-4 py-3 border border-[var(--portfolio-accent)] max-w-fit">
             <span class="w-2 h-2 bg-[var(--portfolio-accent)]" />
@@ -168,25 +180,92 @@ async function onSubmit () {
             class="relative pl-12 md:pl-16 pb-12 last:pb-0"
           >
             <div class="absolute left-2 md:left-4 top-1 w-4 h-4 rounded-full bg-[var(--portfolio-accent)] border-2 border-[var(--portfolio-bg)]" aria-hidden="true" />
-            <div class="portfolio-box flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+            <button
+              type="button"
+              class="portfolio-box flex flex-col md:flex-row md:items-start md:justify-between gap-4 w-full text-left cursor-pointer hover:border-[var(--portfolio-accent)] transition-colors"
+              @click="openProjectModal(project)"
+            >
               <div class="flex-1 min-w-0">
                 <span class="text-xs font-mono text-[var(--portfolio-accent)]">{{ project.year }}</span>
                 <h3 class="font-bold text-lg text-[var(--portfolio-text)] mt-1 mb-2">{{ project.name }}</h3>
                 <p class="text-sm text-[var(--portfolio-text-muted)]">{{ project.description }}</p>
+                <div v-if="project.technologies" class="mt-4 flex flex-wrap gap-2">
+                  <span
+                    v-for="tech in String(project.technologies).split(/,\s*/)"
+                    :key="tech"
+                    class="portfolio-pill"
+                  >
+                    {{ tech.trim() }}
+                  </span>
+                </div>
               </div>
-              <a
-                :href="project.repoUrl || project.liveUrl"
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center gap-2 py-2 px-4 text-sm border border-[var(--portfolio-border)] text-[var(--portfolio-text-muted)] hover:text-[var(--portfolio-accent)] hover:border-[var(--portfolio-accent)] transition-colors shrink-0"
-              >
-                <UIcon name="i-simple-icons-github" class="w-4 h-4" />
-                Repo
-              </a>
-            </div>
+              <span class="inline-flex items-center gap-2 py-2 px-4 text-sm border border-[var(--portfolio-border)] text-[var(--portfolio-text-muted)] shrink-0">
+                <UIcon name="i-lucide-external-link" class="w-4 h-4" />
+                {{ ui.viewRepo }}
+              </span>
+            </button>
           </li>
         </ul>
       </div>
+
+      <UModal
+        v-model:open="modalOpen"
+        :title="selectedProject?.name"
+        :description="selectedProject?.year ?? ''"
+        :ui="{ footer: 'justify-end gap-2' }"
+      >
+        <span class="sr-only" aria-hidden="true" />
+        <template #body>
+          <div v-if="selectedProject" class="space-y-3">
+            <p v-if="selectedProject.details" class="text-sm text-[var(--portfolio-text-muted)] whitespace-pre-line leading-relaxed">
+              {{ selectedProject.details }}
+            </p>
+            <p v-else class="text-sm text-[var(--portfolio-text-muted)]">
+              {{ selectedProject.description }}
+            </p>
+            <div v-if="selectedProject.technologies" class="pt-3 border-t border-[var(--portfolio-border)] flex flex-wrap gap-2">
+              <span
+                v-for="tech in String(selectedProject.technologies).split(/,\s*/)"
+                :key="tech"
+                class="portfolio-pill"
+              >
+                {{ tech.trim() }}
+              </span>
+            </div>
+          </div>
+        </template>
+        <template #footer="{ close }">
+          <UButton
+            v-if="selectedProject?.liveUrl"
+            color="neutral"
+            variant="outline"
+            :label="ui.viewLive"
+            icon="i-lucide-external-link"
+            :to="selectedProject.liveUrl"
+            external
+            target="_blank"
+            rel="noopener"
+            @click="close"
+          />
+          <UButton
+            v-if="selectedProject?.repoUrl"
+            color="neutral"
+            :label="ui.viewRepo"
+            icon="i-simple-icons-github"
+            :to="selectedProject.repoUrl"
+            external
+            target="_blank"
+            rel="noopener"
+            @click="close"
+          />
+          <UButton
+            color="neutral"
+            variant="ghost"
+            :label="ui.close"
+            @click="closeProjectModal"
+          />
+        </template>
+      </UModal>
     </section>
 
     <!-- #skills -->
@@ -229,8 +308,12 @@ async function onSubmit () {
           </a>
         </div>
         <div class="relative">
-          <div class="aspect-[4/5] max-w-sm mx-auto border border-[var(--portfolio-border)] flex items-center justify-center bg-[var(--portfolio-bg-elevated)]">
-            <UIcon name="i-lucide-user" class="w-32 h-32 text-[var(--portfolio-text-muted)]" />
+          <div class="aspect-[4/5] max-w-sm mx-auto border border-[var(--portfolio-border)] overflow-hidden bg-[var(--portfolio-bg-elevated)]">
+            <img
+              src="/foto-perfil.png"
+              :alt="portfolio.name"
+              class="w-full h-full object-cover object-top"
+            />
           </div>
           <div class="absolute bottom-0 right-0 w-24 h-0.5 bg-[var(--portfolio-accent)]" />
         </div>

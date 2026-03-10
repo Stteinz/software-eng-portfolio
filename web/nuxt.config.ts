@@ -47,8 +47,8 @@ export default defineNuxtConfig({
       glbModelUrl: process.env.NUXT_PUBLIC_GLB_MODEL_URL || '/models/computador-cenario.glb',
       /** Nome do objeto da tela no GLB (no nosso caso, o nome é Screen). Ex: Screen, Monitor, Display */
       screenObjectName: process.env.NUXT_PUBLIC_SCREEN_OBJECT_NAME || 'screen',
-      /** true = girar a tela 180° (corrige orientacao no monitor 3D) */
-      screenFlip: process.env.NUXT_PUBLIC_SCREEN_FLIP !== 'false',
+      /** true = girar a tela 180° (se o portfólio aparecer de costas) */
+      screenFlip: process.env.NUXT_PUBLIC_SCREEN_FLIP === 'true',
       /** Ajuste fino da posição da tela 3D em unidades locais do mesh. Positivo=mais para dentro do monitor. */
       screenNudge: Number(process.env.NUXT_PUBLIC_SCREEN_NUDGE ?? -0.02)
     }

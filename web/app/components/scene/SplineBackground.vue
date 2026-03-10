@@ -4,7 +4,7 @@
  * Para usar sua própria cena: crie no Spline (spline.design), exporte como "Code" e defina NUXT_PUBLIC_SPLINE_SCENE_URL no .env
  */
 const config = useRuntimeConfig().public
-const sceneUrl = (config as { splineSceneUrl?: string }).splineSceneUrl || 'https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode'
+const sceneUrl = (config as { splineSceneUrl?: string }).splineSceneUrl || 'https://prod.spline.design/ckdVsH19CN1mIRH4/scene.splinecode'
 
 const props = withDefaults(
   defineProps<{

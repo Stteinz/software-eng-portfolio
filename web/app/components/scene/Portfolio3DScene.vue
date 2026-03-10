@@ -37,10 +37,10 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 const containerRef = ref<HTMLDivElement | null>(null)
 const isLoaded = ref(false)
 const errorMessage = ref('')
+const cameraLocked = ref(false)
 
 const cleanupState = ref<{
   onResize: () => void
-  onPointerEnter?: () => void
   onPointerLeave?: () => void
   onPointerMove?: (event: PointerEvent) => void
   frameRef: { current: number }
@@ -53,7 +53,6 @@ onUnmounted(() => {
   const s = cleanupState.value
   if (s) {
     window.removeEventListener('resize', s.onResize)
-    if (s.onPointerEnter) s.container.removeEventListener('pointerenter', s.onPointerEnter)
     if (s.onPointerLeave) s.container.removeEventListener('pointerleave', s.onPointerLeave)
     if (s.onPointerMove) s.container.removeEventListener('pointermove', s.onPointerMove)
     cancelAnimationFrame(s.frameRef.current)
@@ -239,20 +238,20 @@ onMounted(async () => {
       const width = horizontalAxis.size * getAxisWorldScale(horizontalAxis.key)
       const height = verticalAxis.size * getAxisWorldScale(verticalAxis.key)
       const depth = normalAxis.size * getAxisWorldScale(normalAxis.key)
-      // Estes pontos definem a "cena cinematografica": camera longe no inicio,
-      // aproximacao ate a tela e alvo final centralizado no monitor.
+      // Estes pontos definem a "cena cinematografica": camera na frente do modelo (na direcao
+      // que a tela encara), longe no inicio, aproximacao ate a tela e alvo centralizado no monitor.
       const cameraEndTarget = screenCenter.clone().add(verticalWorld.clone().multiplyScalar(height * 0.02))
-      const cameraApproachDirection = normalWorld.clone().multiplyScalar(-1)
+      const cameraApproachDirection = normalWorld.clone()
       const cameraStartPosition = screenCenter
         .clone()
-        .add(cameraApproachDirection.clone().multiplyScalar(maxDim * 2.1))
+        .add(cameraApproachDirection.clone().multiplyScalar(maxDim * 2.5))
         .add(verticalWorld.clone().multiplyScalar(maxDim * 0.55))
-        .add(horizontalWorld.clone().multiplyScalar(-maxDim * 0.9))
+        .add(horizontalWorld.clone().multiplyScalar(maxDim * 0.15))
       const targetStartPosition = cameraEndTarget.clone()
       const cameraEndPosition = screenCenter
         .clone()
-        .add(cameraApproachDirection.clone().multiplyScalar(maxDim * 0.06))
-        .add(verticalWorld.clone().multiplyScalar(maxDim * 0.01))
+        .add(cameraApproachDirection.clone().multiplyScalar(maxDim * 0.08))
+        .add(verticalWorld.clone().multiplyScalar(maxDim * 0.04))
       const cameraMidPosition = cameraStartPosition.clone().lerp(cameraEndPosition, 0.55)
       const cameraPath = new THREE.CatmullRomCurve3([
         cameraStartPosition.clone(),
@@ -309,53 +308,78 @@ onMounted(async () => {
       const scaleMultiplier = props.screenScale ?? 1.0
       const scaleX = (width * scaleMultiplier) / 1920
       const scaleY = (height * scaleMultiplier) / 1080
-      css3dObject.scale.set(-scaleX, scaleY, 0.001)
+      css3dObject.scale.set(scaleX, scaleY, 0.001)
 
       iframe.style.transform = 'translate(-50%, -50%)'
 
       cssScene.add(css3dObject)
 
-      // Hover inicia a aproximacao.
-      const onPointerEnter = () => {
-        pointerState.active = true
-        pointerState.targetProgress = 1
+      const marginPx = 100
+
+      function isPointerNearScreen (clientX: number, clientY: number): boolean {
+        const rect = container.getBoundingClientRect()
+        if (!rect.width || !rect.height) return false
+        const corners = [
+          screenCenter.clone().add(horizontalWorld.clone().multiplyScalar(width / 2)).add(verticalWorld.clone().multiplyScalar(height / 2)),
+          screenCenter.clone().add(horizontalWorld.clone().multiplyScalar(-width / 2)).add(verticalWorld.clone().multiplyScalar(height / 2)),
+          screenCenter.clone().add(horizontalWorld.clone().multiplyScalar(-width / 2)).add(verticalWorld.clone().multiplyScalar(-height / 2)),
+          screenCenter.clone().add(horizontalWorld.clone().multiplyScalar(width / 2)).add(verticalWorld.clone().multiplyScalar(-height / 2))
+        ]
+        let minX = Infinity; let maxX = -Infinity; let minY = Infinity; let maxY = -Infinity
+        for (const c of corners) {
+          const v = c.clone().project(camera)
+          const px = (v.x + 1) * 0.5 * rect.width
+          const py = (1 - v.y) * 0.5 * rect.height
+          minX = Math.min(minX, px)
+          maxX = Math.max(maxX, px)
+          minY = Math.min(minY, py)
+          maxY = Math.max(maxY, py)
+        }
+        const px = clientX - rect.left
+        const py = clientY - rect.top
+        return px >= minX - marginPx && px <= maxX + marginPx && py >= minY - marginPx && py <= maxY + marginPx
       }
 
-      // Saiu da area: volta ao enquadramento inicial.
-      const onPointerLeave = () => {
-        pointerState.active = false
-        pointerState.targetProgress = 0
-      }
-
-      // O mouse nao troca a rota principal; ele so adiciona deslocamento sutil.
       const onPointerMove = (event: PointerEvent) => {
         const rect = container.getBoundingClientRect()
         if (!rect.width || !rect.height) return
         pointerState.x = (event.clientX - rect.left) / rect.width - 0.5
         pointerState.y = (event.clientY - rect.top) / rect.height - 0.5
-        pointerState.targetProgress = 1
+        pointerState.targetProgress = isPointerNearScreen(event.clientX, event.clientY) ? 1 : 0
       }
 
-      container.addEventListener('pointerenter', onPointerEnter)
+      const onPointerLeave = () => {
+        pointerState.targetProgress = 0
+      }
+
       container.addEventListener('pointerleave', onPointerLeave)
       container.addEventListener('pointermove', onPointerMove)
 
       const frameRef = { current: 0 }
-      // Loop principal da cena: interpola camera/alvo e renderiza WebGL + CSS3D.
+
       function animate () {
         frameRef.current = requestAnimationFrame(animate)
-        pointerState.progress = THREE.MathUtils.lerp(pointerState.progress, pointerState.targetProgress, 0.04)
+        const locked = cameraLocked.value
 
-        const currentCameraPos = cameraPath.getPoint(pointerState.progress)
-        const currentTarget = targetPath.getPoint(pointerState.progress)
-        const parallax = Math.max(pointerState.progress, 0.15)
-        const cameraOffset = horizontalWorld.clone().multiplyScalar(pointerState.x * maxDim * 0.18 * parallax)
-        const targetOffset = horizontalWorld.clone().multiplyScalar(pointerState.x * maxDim * 0.1 * parallax)
-          .add(verticalWorld.clone().multiplyScalar(pointerState.y * maxDim * 0.08 * parallax))
+        controls.enableRotate = locked
+        controls.enablePan = locked
+        controls.enableZoom = locked
 
-        camera.position.copy(currentCameraPos.add(cameraOffset))
-        controls.target.copy(currentTarget.add(targetOffset))
-        controls.update()
+        if (locked) {
+          controls.update()
+        } else {
+          pointerState.progress = THREE.MathUtils.lerp(pointerState.progress, pointerState.targetProgress, 0.04)
+          const currentCameraPos = cameraPath.getPoint(pointerState.progress)
+          const currentTarget = targetPath.getPoint(pointerState.progress)
+          const parallax = Math.max(pointerState.progress, 0.15)
+          const cameraOffset = horizontalWorld.clone().multiplyScalar(pointerState.x * maxDim * 0.18 * parallax)
+          const targetOffset = horizontalWorld.clone().multiplyScalar(pointerState.x * maxDim * 0.1 * parallax)
+            .add(verticalWorld.clone().multiplyScalar(pointerState.y * maxDim * 0.08 * parallax))
+
+          camera.position.copy(currentCameraPos.add(cameraOffset))
+          controls.target.copy(currentTarget.add(targetOffset))
+          controls.update()
+        }
         renderer.render(scene, camera)
         cssRenderer.render(cssScene, camera)
       }
@@ -365,7 +389,6 @@ onMounted(async () => {
 
       cleanupState.value = {
         onResize,
-        onPointerEnter,
         onPointerLeave,
         onPointerMove,
         frameRef,
@@ -423,6 +446,17 @@ onMounted(async () => {
 <template>
   <div ref="containerRef" class="portfolio-3d-scene">
     <canvas ref="canvasRef" class="portfolio-3d-canvas" />
+    <button
+      v-if="isLoaded && !errorMessage"
+      type="button"
+      :title="cameraLocked ? 'Desbloquear câmera' : 'Travar câmera e mover o modelo'"
+      class="camera-lock-btn"
+      :class="{ 'camera-lock-btn--active': cameraLocked }"
+      @click="cameraLocked = !cameraLocked"
+    >
+      <UIcon :name="cameraLocked ? 'i-lucide-lock' : 'i-lucide-lock-open'" class="w-4 h-4" />
+      {{ cameraLocked ? 'Câmera travada' : 'Travar câmera' }}
+    </button>
     <p v-if="errorMessage" class="portfolio-3d-error">
       {{ errorMessage }}
     </p>
@@ -455,5 +489,33 @@ onMounted(async () => {
   color: var(--portfolio-text-muted);
   font-size: 0.875rem;
   text-align: center;
+}
+
+.camera-lock-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(15, 15, 20, 0.85);
+  border: 1px solid var(--portfolio-border);
+  color: var(--portfolio-text-muted);
+  font-size: 0.8125rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.camera-lock-btn:hover {
+  color: var(--portfolio-text);
+  border-color: var(--portfolio-accent);
+}
+
+.camera-lock-btn--active {
+  border-color: var(--portfolio-accent);
+  color: var(--portfolio-accent);
 }
 </style>

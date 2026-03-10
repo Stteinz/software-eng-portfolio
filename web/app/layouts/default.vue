@@ -12,10 +12,6 @@ const navItems = computed(() => [
 
 <template>
   <div class="min-h-screen bg-[var(--portfolio-bg)] text-[var(--portfolio-text)] font-sans">
-    <ClientOnly>
-      <SplineBackground :opacity="0.7" />
-    </ClientOnly>
-
     <aside class="fixed left-0 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-4 pl-3 md:pl-4">
       <a
         :href="portfolio.links.github"
@@ -35,13 +31,6 @@ const navItems = computed(() => [
       >
         <UIcon name="i-simple-icons-linkedin" class="w-5 h-5" />
       </a>
-      <button
-        type="button"
-        class="w-10 h-10 rounded-full border border-[var(--portfolio-border)] flex items-center justify-center text-[var(--portfolio-text-muted)] hover:text-[var(--portfolio-accent)] hover:border-[var(--portfolio-accent)] transition-colors"
-        aria-label="Settings"
-      >
-        <UIcon name="i-lucide-settings" class="w-5 h-5" />
-      </button>
       <a
         href="#contacts"
         class="w-10 h-10 rounded-full border border-[var(--portfolio-border)] flex items-center justify-center text-[var(--portfolio-text-muted)] hover:text-[var(--portfolio-accent)] hover:border-[var(--portfolio-accent)] transition-colors"

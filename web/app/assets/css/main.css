@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Portfolio theme: dark background + purple accent */
+@theme static {
+  --font-sans: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Dark background (IDE-like) */
+  --color-background: #1e1e28;
+  --color-foreground: #f8f8f2;
+  --color-muted: #a0a0a0;
+  --color-border: #44475a;
+
+  /* Purple accent */
+  --color-accent: #be84ed;
+  --color-accent-hover: #b38cd4;
+}
+
+:root {
+  --portfolio-bg: #171925;
+  --portfolio-bg-elevated: rgba(30, 34, 49, 0.86);
+  --portfolio-bg-soft: rgba(190, 132, 237, 0.08);
+  --portfolio-text: #f5f7ff;
+  --portfolio-text-muted: #aab0c5;
+  --portfolio-border: rgba(190, 132, 237, 0.2);
+  --portfolio-accent: #c792ea;
+  --portfolio-accent-strong: #e3a7ff;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(199, 146, 234, 0.14), transparent 24%),
+    radial-gradient(circle at 80% 10%, rgba(111, 132, 255, 0.12), transparent 18%),
+    linear-gradient(180deg, #171925 0%, #11131d 100%);
+  color: var(--portfolio-text);
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(199, 146, 234, 0.3);
+  color: var(--portfolio-text);
+}
+
+/* Section titles with # and purple underline */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.section-title .hash {
+  color: var(--portfolio-accent);
+}
+
+.section-title-underline {
+  height: 2px;
+  width: 100%;
+  max-width: 240px;
+  background: linear-gradient(90deg, var(--portfolio-accent), transparent);
+  margin-bottom: 1.5rem;
+}
+
+/* Bordered boxes (skills, facts, quote) */
+.portfolio-box {
+  border: 1px solid var(--portfolio-border);
+  padding: 1rem 1.25rem;
+  background: linear-gradient(180deg, rgba(30, 34, 49, 0.9), rgba(20, 22, 32, 0.72));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.portfolio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--portfolio-border);
+  padding: 0.45rem 0.75rem;
+  background: var(--portfolio-bg-soft);
+  color: var(--portfolio-text-muted);
+  font-size: 0.75rem;
+}
+
+/* Dot pattern decoration */
+.dot-pattern {
+  background-image: radial-gradient(circle, var(--portfolio-text-muted) 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.4;
+}
