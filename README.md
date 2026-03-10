@@ -53,8 +53,7 @@
 ---
 
 ## 🔗 Links Úteis
-* 🌐 **Demo Online:** [Acesse a Aplicação Web](https://software-eng-portfolio.vercel.app) *(configure o deploy e atualize o link)*
-  > 💻 **Descrição:** Link para a aplicação em produção (ex.: Vercel, Netlify).
+* 🌐 **Portfolio Online:** [Acesse a Aplicação Web](https://gabriel-lacerda-stteinz.vercel.app/)
 * 📖 **Documentação do projeto:** [web/docs/README.md](./web/docs/README.md)
   > 📚 **Descrição:** Guias e estrutura do projeto.
 
