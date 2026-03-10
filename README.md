@@ -26,9 +26,9 @@
 
 [![Versão](https://img.shields.io/badge/Versão-v0.1.0-blue?style=for-the-badge)](https://github.com) [![Licença](https://img.shields.io/badge/Licença-MIT-green?style=for-the-badge)](#licença)
 
-### Tecnologias previstas
+### Tecnologias utilizadas
 
-![Nuxt](https://img.shields.io/badge/Nuxt-3+-00DC82?style=flat-square&logo=nuxt.js&logoColor=white) ![Vue](https://img.shields.io/badge/Vue-3+-4FC08D?style=flat-square&logo=vue.js&logoColor=white) ![Three.js](https://img.shields.io/badge/Three.js-r170+-000000?style=flat-square&logo=threedotjs&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Nuxt](https://img.shields.io/badge/Nuxt-4+-00DC82?style=flat-square&logo=nuxt.js&logoColor=white) ![Vue](https://img.shields.io/badge/Vue-3+-4FC08D?style=flat-square&logo=vue.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind-4+-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) ![Three.js](https://img.shields.io/badge/Three.js-r170+-000000?style=flat-square&logo=threedotjs&logoColor=white)
 
 ---
 
@@ -39,18 +39,10 @@
 - [Funcionalidades Principais](#-funcionalidades-principais)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Arquitetura](#-arquitetura)
-  - [Exemplos de diagramas](#exemplos-de-diagramas)
 - [Instalação e Execução](#-instalação-e-execução)
-  - [Pré-requisitos](#pré-requisitos)
-  - [Variáveis de Ambiente](#-variáveis-de-ambiente)
-  - [Instalação de Dependências](#-instalação-de-dependências)
-  - [Como Executar a Aplicação](#-como-executar-a-aplicação)
 - [Deploy](#-deploy)
 - [Estrutura de Pastas](#-estrutura-de-pastas)
 - [Demonstração](#-demonstração)
-  - [Aplicativo Mobile](#-aplicativo-mobile)
-  - [Aplicação Web](#-aplicação-web)
-  - [Exemplo de saída no Terminal (para Back-end, API, CLI)](#-exemplo-de-saída-no-terminal-para-back-end-api-cli)
 - [Testes](#-testes)
 - [Documentações utilizadas](#-documentações-utilizadas)
 - [Autores](#-autores)
@@ -61,12 +53,10 @@
 ---
 
 ## 🔗 Links Úteis
-* 🌐 **Demo Online:** [Acesse a Aplicação Web](<link-da-demo-web>)
-  > 💻 **Descrição:** Link para a aplicação em ambiente de produção (Ex: hospedado na Vercel, Netlify ou AWS S3).
-* 📱 **Download Mobile:** [App Store](<link-app-store>) | [Google Play](<link-google-play>) | [APK Direto](<link-para-apk-direto>)
-  > 📱 **Descrição:** Links diretos para download nas lojas de aplicativos (se aplicável) e para o arquivo de instalação direta no Android (APK).
-* 📖 **Documentação:** [web/docs/README.md](./web/docs/README.md)
-  > 📚 **Descrição:** Guias para Blender, integração 3D e estrutura do projeto.
+* 🌐 **Demo Online:** [Acesse a Aplicação Web](https://software-eng-portfolio.vercel.app) *(configure o deploy e atualize o link)*
+  > 💻 **Descrição:** Link para a aplicação em produção (ex.: Vercel, Netlify).
+* 📖 **Documentação do projeto:** [web/docs/README.md](./web/docs/README.md)
+  > 📚 **Descrição:** Guias e estrutura do projeto.
 
 ---
 
@@ -113,137 +103,68 @@ Conforme requisitos do laboratório:
 
 ## 🛠 Tecnologias Utilizadas
 
-As seguintes ferramentas, frameworks e bibliotecas foram utilizados na construção deste projeto. Recomenda-se o uso das versões listadas (ou superiores) para garantir a compatibilidade.
+Ferramentas e bibliotecas utilizadas no projeto. Recomenda-se as versões listadas (ou superiores) para compatibilidade.
 
 ### 💻 Front-end
 
-* **Framework/Biblioteca:** Nuxt 3 (Vue 3)
-* **Linguagem/Superset:** TypeScript, JavaScript ES6+
-* **Gráficos 3D:** Three.js
-* **Estilização:** [Ex: Tailwind CSS, Sass, Styled Components, Material UI]
-* **Envio de e-mail:** EmailJS
-
-### 🖥️ Back-end
-
-* **Linguagem/Runtime:** [Ex: Java 17 (JDK), Node.js v20, Python 3.11]
-* **Framework:** [Ex: Spring Boot 3.x, NestJS, Express, Django]
-* **Banco de Dados:** [Ex: PostgreSQL, MySQL, MongoDB]
-* **ORM / Query Builder:** [Ex: Hibernate/JPA, Prisma, TypeORM]
-* **Autenticação:** [Ex: JWT, OAuth2, Spring Security]
-
-### 📱 Mobile (Opcional)
-
-* **Framework:** [Ex: React Native, Flutter, Kotlin Multiplatform]
-* **Ferramentas:** [Ex: Expo, Android Studio, Xcode]
-
-### ⚙️ Infraestrutura & DevOps
-
-* **Containerização:** [Ex: Docker, Docker Compose]
-* **Orquestração:** [Ex: Kubernetes (K8s)]
-* **Cloud:** [Ex: AWS (EC2, RDS, S3), Vercel, Heroku, Google Cloud]
-* **CI/CD:** [Ex: GitHub Actions, Jenkins, SonarQube]
+| Tecnologia | Uso |
+| :--- | :--- |
+| **Nuxt 4** | Framework (Vue 3) com SSR e rotas baseadas em arquivos |
+| **Vue 3** | Interface reativa e componentes |
+| **TypeScript** | Tipagem estática |
+| **Nuxt UI** | Componentes e Tailwind CSS 4 |
+| **Three.js** | Cenas e modelos 3D (GLB) |
+| **Spline** | Cenário 3D interativo (Spline Viewer) |
+| **EmailJS** | Envio de e-mails do formulário de contato |
+| **Iconify (Lucide, Simple Icons)** | Ícones |
 
 ---
 
 ## 🏗 Arquitetura
 
-Descreva aqui a **arquitetura completa do sistema**, explicando como as camadas, módulos e componentes foram organizados. Informe também **por que** essa arquitetura foi escolhida e **quais problemas ela ajuda a resolver**.
+O projeto é uma **Single Page Application (SPA)** com pré-renderização da home. A aplicação roda inteiramente no front-end (Nuxt), sem back-end próprio.
 
-Você pode incluir:
+- **Camadas:** Páginas (`pages/`), layouts (`layouts/`), componentes reutilizáveis (`components/`), dados do portfólio (`data/`), composables para lógica compartilhada (`composables/`).
+- **3D:** Integração com Three.js (modelo GLB na hero) e Spline (cenário interativo via viewer).
+- **Contato:** Formulário envia e-mails via EmailJS (client-side).
+- **i18n:** Conteúdo em PT/EN via composable e dados localizados.
 
-- **Visão geral da arquitetura** (ex.: camadas, módulos, microsserviços, monólito modular, hexagonal, MVC etc.)
-- **Principais componentes** e o papel de cada um
-- **Padrões de design adotados** (ex.: Repository, Service Layer, DTOs, Factory, Observer)
-- **Fluxo de dados** entre as partes do sistema
-- **Tecnologias utilizadas em cada camada**
-- **Decisões arquiteturais importantes**
-- **Trade-offs** ou limitações relevantes
-
-### Exemplos de diagramas
-
-Para melhor visualização e entendimento da estrutura do sistema, os diagramas principais estão organizados lado a lado.
-
-| Diagrama de Arquitetura | Detalhe da Arquitetura |
-| :---: | :---: |
-| **Visão Geral (Macro)** | **Camada de Serviço (Micro)** |
-| | |
-| **Modelo de Dados (Entidades)** | **Fluxo de Autenticação** |
-| | |
-| **Infraestrutura (Cloud)** | **API Gateway (Rotas)** |
-| | |
+Para diagramas de arquitetura (macro, fluxos, modelo de dados), inclua os arquivos em `web/docs/` e referencie nesta seção.
 
 ---
 
 ## 🔧 Instalação e Execução
 
 ### Pré-requisitos
-Certifique-se de que o usuário tenha o ambiente configurado.
 
-* **Java JDK:** Versão **17** ou superior (Necessário para o **Back-end Spring Boot**)
-* **Node.js:** Versão LTS (v18.x ou superior) (Necessário para o **Front-end Nuxt**)
-* **Gerenciador de Pacotes:** npm ou yarn
-* **Docker** (Opcional, mas **altamente recomendado** para rodar o Banco de Dados)
+* **Node.js:** v18 LTS ou superior (recomendado v20+)
+* **Gerenciador de pacotes:** pnpm (recomendado) ou npm
 
 ### 🔑 Variáveis de Ambiente
 
-Crie arquivos `.env` específicos e/ou configure as variáveis de ambiente no seu sistema para cada parte da aplicação.
-
-#### 1 Back-end (Spring Boot)
-
-Configure estas variáveis como **variáveis de ambiente do sistema** ou em um arquivo de configuração do Spring (ex: `application.properties`/`application.yml`).
+Crie um arquivo **`.env`** na pasta **`web/`** (pode usar `web/.env.example` como base). Variáveis expostas ao front-end devem usar o prefixo `NUXT_PUBLIC_`.
 
 | Variável | Descrição | Exemplo |
 | :--- | :--- | :--- |
-| `SERVER_PORT` | Porta onde o Back-end será executado. | `8080` |
-| `SPRING_DATASOURCE_URL` | URL de conexão JDBC (PostgreSQL). | `jdbc:postgresql://localhost:5432/meubanco` |
-| `SPRING_DATASOURCE_USERNAME` | Usuário do banco de dados. | `postgres` |
-| `SPRING_DATASOURCE_PASSWORD` | Senha do banco de dados. | `senha-segura-123` |
-| `JWT_SECRET` | Chave secreta para assinatura de tokens (Opcional). | `chave_super_segura_base64` |
+| `NUXT_PUBLIC_EMAILJS_PUBLIC_KEY` | Chave pública do EmailJS | `sua_public_key` |
+| `NUXT_PUBLIC_EMAILJS_SERVICE_ID` | ID do serviço EmailJS | `service_xxx` |
+| `NUXT_PUBLIC_EMAILJS_TEMPLATE_ID` | ID do template de e-mail | `template_xxx` |
+| `NUXT_PUBLIC_SPLINE_SCENE_URL` | URL da cena Spline (.splinecode) | `https://prod.spline.design/.../scene.splinecode` |
+| `NUXT_PUBLIC_GLB_MODEL_URL` | URL do modelo 3D (GLB). Se vazio, usa arquivo em `public/models/` | `/models/computador-cenario.glb` ou URL externa |
+| `NUXT_PUBLIC_SCREEN_OBJECT_NAME` | Nome do objeto "tela" no GLB | `screen` |
+| `NUXT_PUBLIC_SCREEN_FLIP` | Girar 180° a textura da tela | `true` ou `false` |
+| `NUXT_PUBLIC_SCREEN_NUDGE` | Ajuste fino da posição da tela 3D | `-0.02` |
 
-#### 2 Front-end (Nuxt)
+**Exemplo de `.env` na pasta `web/`:**
 
-Crie um arquivo **`.env`** na raiz do projeto e use o prefixo `NUXT_PUBLIC_` para expor as variáveis ao *bundle* da aplicação.
-
-| Variável | Descrição | Exemplo |
-| :--- | :--- | :--- |
-| `NUXT_PUBLIC_API_URL` | URL base do endpoint do Backend (se houver). | `http://localhost:8080/api` |
-| `NUXT_PUBLIC_EMAILJS_SERVICE_ID` | ID do serviço EmailJS. | `seu_service_id_aqui` |
-| `NUXT_PUBLIC_EMAILJS_TEMPLATE_ID` | ID do template de e-mail. | `seu_template_id_aqui` |
-| `NUXT_PUBLIC_EMAILJS_PUBLIC_KEY` | Chave pública EmailJS. | `sua_public_key_aqui` |
-
----
-
-#### 3. Exemplos de Variáveis de Ambiente na Vercel
-
-A Vercel permite configurar variáveis no painel (Project Settings > Environment Variables).
-Aqui estão exemplos comuns utilizadas em aplicações front-end e full-stack:
-
-##### **Exemplo 4 – Frontend com Nuxt (EmailJS)**
-
-```
-NUXT_PUBLIC_EMAILJS_SERVICE_ID=seu_service_id_aqui
-NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_FOR_ME=seu_template_id_for_me_aqui
-NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_FOR_SENDER=seu_template_id_for_sender_aqui
+```env
 NUXT_PUBLIC_EMAILJS_PUBLIC_KEY=sua_public_key_aqui
-```
-
-> **Obs:** As variáveis de ambiente em projetos **Nuxt** precisam começar com `NUXT_PUBLIC_` para que o Nuxt as reconheça e as inclua no *bundle* do frontend.
-
----
-
-Para adicionar essas variáveis:
-
-1.  Acesse a página de Environment Variables do seu projeto no Vercel (ex.: `https://vercel.com/<seu-usuario>/<seu-projeto>/settings/environment-variables`)
-2.  Clique em **"Add"** para adicionar cada variável com o nome e valor correspondente.
-
-Alternativamente, crie um arquivo **`.env.local`** na pasta `web/`:
-
-```
 NUXT_PUBLIC_EMAILJS_SERVICE_ID=seu_service_id_aqui
-NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_FOR_ME=seu_template_id_for_me_aqui
-NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_FOR_SENDER=seu_template_id_for_sender_aqui
-NUXT_PUBLIC_EMAILJS_PUBLIC_KEY=sua_public_key_aqui
+NUXT_PUBLIC_EMAILJS_TEMPLATE_ID=seu_template_id_aqui
+# NUXT_PUBLIC_GLB_MODEL_URL=  # opcional; modelo em public/models/ ou URL externa
 ```
+
+Para **Vercel:** configure as mesmas variáveis em *Project Settings → Environment Variables*.
 
 ### 📦 Instalação de Dependências
 
@@ -265,32 +186,11 @@ pnpm install
 
 ---
 
-### 💾 Inicialização do Banco de Dados (PostgreSQL)
-
-```bash
-docker run --name minha_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=senha-segura-123 -e POSTGRES_DB=nome_do_banco -p 5432:5432 -d postgres:16
-```
-
----
-
 ### ⚡ Como Executar a Aplicação
 
-#### Terminal 1: Back-end (Spring Boot)
+#### Executar a aplicação (apenas front-end)
 
-```bash
-cd backend
-./mvnw spring-boot:run
-```
-🚀 *O Back-end estará disponível em **http://localhost:8080**.*
-
-#### Terminal 2: Front-end (Nuxt)
-
-```bash
-pnpm run dev
-# Ou: cd web && pnpm run dev
-```
-
-🎨 O site estará disponível em **http://localhost:3000** (Nuxt).
+Na raiz: `pnpm run dev`. Ou em `web/`: `cd web && pnpm run dev`. Aplicação em **http://localhost:3000**.
 ---
 
 ## 🚀 Deploy
@@ -358,7 +258,7 @@ java -jar backend/target/nome-do-projeto-0.0.1-SNAPSHOT.jar
 Use GIFs e prints para mostrar o projeto em ação.
 
 > [!WARNING]
-> Dê preferência a hospedar suas imagens em um **CDN** (Content Delivery Network) ou no **GitHub Pages** para garantir que elas carreguem rapidamente e não quebrem. Saiba mais sobre o GitHub Pages clicando [aqui](https://github.com/joaopauloaramuni/joaopauloaramuni.github.io).
+> Dê preferência a hospedar suas imagens em um **CDN** ou no **GitHub** para garantir que elas carreguem rapidamente e não quebrem.
 
 ### Protótipo (Lab01S01)
 
@@ -366,89 +266,39 @@ Use GIFs e prints para mostrar o projeto em ação.
 | :---: |
 | ![Protótipo Home](./web/docs/prototipo/prototipo-home.png) |
 
-### 📱 Aplicativo Mobile
-
-| Demonstração 1 | Demonstração 2 | Demonstração 3 | Demonstração 4 |
-|----------------|----------------|----------------|----------------|
-| | | | |
-| _Sua gif aqui_ | _Sua gif aqui_ | _Sua gif aqui_ | _Sua gif aqui_ |
-
-| Tela | Captura de Tela |
-| :---: | :---: |
-| **Tela Inicial (Home)** | **Tela de Perfil / Settings** |
-| | |
-| **Tela de Cadastro** | **Tela de Lista / Detalhes** |
-| | |
-
 ### 🌐 Aplicação Web
 
-| Tela | Captura de Tela |
+Inclua aqui capturas de tela ou GIFs das páginas principais: **Home**, **Experiências** (`/experience`), **Embed** (se aplicável). Exemplo:
+
+| Página | Captura |
 | :---: | :---: |
-| **Página Inicial (Home)** | **Página de Login** |
-| | |
-| **Cadastro de Clientes** | **Cadastro de Produtos** |
-| | |
-| **Dashboard (Visão Geral)** | **Página Admin / Configurações** |
-| | |
-
-### 💻 Exemplo de Saída no Terminal (para Back-end, API, CLI)
-
-Caso o projeto seja focado em serviços de Back-end (API, microserviço, CLI), utilize esta seção para demonstrar a interação com o sistema e a resposta esperada.
-
-#### 1. Demonstração da API (Exemplo com cURL)
-
-```bash
-curl -X GET 'http://localhost:3000/api/v1/users' \
-     -H 'Authorization: Bearer <seu-jwt-token>'
-```
-
-**Saída Esperada:**
-```json
-{
-  "total": 2,
-  "users": []
-}
-```
-
----
-
-#### 2. Demonstração de Execução de CLI/Script
-
-```bash
-npm run cli validate:schema --target=production
-```
+| **Home** | _Sua captura ou GIF_ |
+| **Experiências** | _Sua captura ou GIF_ |
 
 ---
 
 ## 🧪 Testes
 
-### Testes Unitários e de Integração
-Para rodar os testes da unidade e integração:
+O projeto possui scripts de **lint** e **typecheck**. Testes unitários e E2E podem ser adicionados futuramente.
 
+```bash
+pnpm run lint      # ESLint
+pnpm run typecheck # Verificação de tipos TypeScript
 ```
-npm run test
-```
-*Ferramenta utilizada: Jest, Vitest, Mocha, etc.*
 
-### Testes End-to-End (E2E)
-Para rodar os testes de ponta a ponta (E2E):
-
-```
-npm run test:e2e
-```
-*Ferramenta utilizada: Cypress, Playwright, Selenium, etc.*
+*Para testes automatizados (ex.: Vitest, Playwright), configure os scripts no `package.json` e documente aqui.*
 
 ---
 
 ## 🔗 Documentações utilizadas
 
-Liste aqui links para documentação técnica, referências de bibliotecas complexas ou guias de estilo que foram cruciais para o projeto.
-
-* 📖 **Nuxt 3:** [Documentação Oficial](https://nuxt.com/docs)
+* 📖 **Nuxt:** [Documentação Oficial](https://nuxt.com/docs)
 * 📖 **Vue 3:** [Documentação Oficial](https://vuejs.org/)
+* 📖 **Nuxt UI:** [Componentes e Tailwind](https://ui.nuxt.com/)
 * 📖 **Three.js:** [Documentação e exemplos](https://threejs.org/docs/)
-* 📖 **Guia de Estilo:** [**Conventional Commits** (Padrão de Mensagens)](https://www.conventionalcommits.org/en/v1.0.0/)
-* 📖 **EmailJS:** [Documentação para envio de e-mail](https://www.emailjs.com/docs/)
+* 📖 **Spline:** [Exportar para web](https://spline.design/)
+* 📖 **Conventional Commits:** [Padrão de mensagens](https://www.conventionalcommits.org/en/v1.0.0/)
+* 📖 **EmailJS:** [Envio de e-mail](https://www.emailjs.com/docs/)
 
 ---
 
@@ -466,16 +316,12 @@ Liste os principais contribuidores. Você pode usar links para seus perfis.
 ---
 
 ## 🤝 Contribuição
-Guia para contribuições ao projeto.
 
-1.  Faça um `fork` do projeto.
-2.  Crie uma branch para sua feature (`git checkout -b feature/minha-feature`).
-3. Commit suas mudanças (`git commit -m 'feat: Adiciona nova funcionalidade X'`). **(Utilize [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/))**
-4.  Faça o `push` para a branch (`git push origin feature/minha-feature`).
-5.  Abra um **Pull Request (PR)**.
-
-> [!IMPORTANT]
-> 📝 **Regras:** Por favor, verifique o arquivo [`CONTRIBUTING.md`](./CONTRIBUTING.md) para detalhes sobre nosso guia de estilo de código e o processo de submissão de PRs.
+1. Faça um `fork` do projeto.
+2. Crie uma branch para sua feature (`git checkout -b feature/minha-feature`).
+3. Commit suas mudanças (`git commit -m 'feat: Adiciona nova funcionalidade X'`). Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+4. Faça o `push` para a branch (`git push origin feature/minha-feature`).
+5. Abra um **Pull Request (PR)**.
 
 ---
 
