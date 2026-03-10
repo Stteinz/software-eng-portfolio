@@ -4,6 +4,9 @@
  * Usado em index.vue e embed.vue (iframe na tela 3D).
  */
 const { portfolio, ui } = usePortfolioLocale()
+const route = useRoute()
+const showHeroSpline = computed(() => route.path === '/')
+const heroSplineUrl = 'https://app.spline.design/file/f836eb00-71dc-4f52-81eb-82f9ae899c02'
 
 const config = useRuntimeConfig().public as {
   emailjsPublicKey?: string
@@ -110,8 +113,18 @@ async function onSubmit () {
         <div class="relative">
           <div class="aspect-square max-w-md mx-auto relative">
             <div class="absolute inset-0 rounded-lg border-2 border-[var(--portfolio-accent)] transform rotate-[-2deg] scale-[0.95]" />
-            <div class="absolute inset-0 rounded-lg border border-[var(--portfolio-border)] flex items-center justify-center bg-[var(--portfolio-bg-elevated)]">
-              <UIcon name="i-lucide-user" class="w-24 h-24 text-[var(--portfolio-text-muted)]" />
+            <div class="absolute inset-0 overflow-hidden rounded-lg border border-[var(--portfolio-border)] bg-[var(--portfolio-bg-elevated)]">
+              <iframe
+                v-if="showHeroSpline"
+                :src="heroSplineUrl"
+                title="Cubo 3D"
+                loading="lazy"
+                class="w-full h-full"
+                frameborder="0"
+              />
+              <div v-else class="flex items-center justify-center w-full h-full">
+                <UIcon name="i-lucide-user" class="w-24 h-24 text-[var(--portfolio-text-muted)]" />
+              </div>
             </div>
             <div class="absolute -top-2 -right-2 w-8 h-8 dot-pattern rounded" />
             <div class="absolute -bottom-2 -left-2 w-6 h-6 dot-pattern rounded" />
