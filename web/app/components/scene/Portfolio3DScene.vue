@@ -74,7 +74,14 @@ onMounted(async () => {
     const THREE = await import('three')
     const { OrbitControls } = await import('three/addons/controls/OrbitControls.js')
     const { GLTFLoader } = await import('three/addons/loaders/GLTFLoader.js')
+    const { DRACOLoader } = await import('three/addons/loaders/DRACOLoader.js')
     const { CSS3DRenderer, CSS3DObject } = await import('three/addons/renderers/CSS3DRenderer.js')
+
+    const dracoLoader = new DRACOLoader()
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/')
+
+    const loader = new GLTFLoader()
+    loader.setDRACOLoader(dracoLoader)
 
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0x0a0a0f)
@@ -111,7 +118,6 @@ onMounted(async () => {
     dirLight.position.set(5, 10, 5)
     scene.add(dirLight)
 
-    const loader = new GLTFLoader()
     const gltf = await loader.loadAsync(props.modelUrl)
     const model = gltf.scene
     scene.add(model)

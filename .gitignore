@@ -26,3 +26,5 @@ logs
 # Modelos 3D grandes (GitHub limita a 100MB). Use CDN ou hospede externamente.
 *.glb
 *.gltf
+# Exceção: computador-cenario comprimido (Draco) ~33MB, dentro do limite.
+!web/public/models/computador-cenario.glb
