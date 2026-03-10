@@ -67,28 +67,12 @@ O **Portfólio Profissional** é um website desenvolvido para apresentar a traje
 - **Objetivo:** Apresentar formação (Engenharia de Software pela PUC Minas), área de atuação (Desenvolvimento Web, Backend PHP/Laravel), interesses e objetivos profissionais.
 - **Contexto:** Projeto acadêmico com foco em boas práticas de desenvolvimento, design responsivo e hospedagem em nuvem.
 
----
+---## 📐 Demonstração
 
-## 📐 Protótipos (Lab01S01)
-
-O protótipo foi desenvolvido com média fidelidade no Figma, contemplando as seções principais do site.
-
-| Protótipo — Visão Geral (Home) |
-| :---: |
-| ![Protótipo Home](./web/docs/prototipo/prototipo-home.png) |
-
-**Elementos do protótipo:**
-- **Cabeçalho e navegação:** Logo, menu (Home, Works, About-me, Contacts), seletor de idioma (PT/EN)
-- **Hero:** Nome, tagline "Future software engineer by PUC Minas", botão "Contact me", citação inspiracional (Charlie Brown Jr.)
-- **#projects:** Cards de projetos com tecnologias, link Live e GitHub (Cached)
-- **#skills:** Categorias (Languages, Databases, Tools, Frameworks) — TS, JavaScript, HTML, MySQL, VSCode, Git, React, Laravel, Vuetify
-- **#about-me:** Texto de apresentação em inglês (Lab01S02 adicionará versão PT)
-- **#contacts:** E-mail, mensagem convidando ao contato
-
-> imagem do protótipo em `web/docs/prototipo/prototipo-home.png`
+### Wireframe (Figma)
+<img src="https://github.com/Stteinz/software-eng-portfolio/blob/main/images/Captura%20de%20tela%20de%202026-03-10%2016-25-58.png?raw=true" width="45%"> <img src="https://github.com/Stteinz/software-eng-portfolio/blob/main/images/Captura%20de%20tela%20de%202026-03-10%2016-26-29.png?raw=true" width="45%">
 
 ---
-
 ## ✨ Funcionalidades Principais
 
 Conforme requisitos do laboratório:
