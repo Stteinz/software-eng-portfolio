@@ -5,12 +5,17 @@
  */
 definePageMeta({ layout: 'embed' })
 
-const config = useRuntimeConfig().public as { glbModelUrl?: string; screenObjectName?: string; screenFlip?: boolean; screenNudge?: number }
+const config = useRuntimeConfig().public as {
+  glbModelUrl?: string
+  screenObjectName?: string
+  screenFlip?: boolean
+  screenNudge?: number
+}
 
 const modelUrl = computed(() => config.glbModelUrl || '/models/computador-cenario.glb')
 const screenObjectName = computed(() => config.screenObjectName || 'screen')
 const screenFlip = computed(() => config.screenFlip ?? false)
-const screenNudge = computed(() => config.screenNudge ?? 0.5)
+const screenNudge = computed(() => config.screenNudge ?? -0.02)
 </script>
 
 <template>

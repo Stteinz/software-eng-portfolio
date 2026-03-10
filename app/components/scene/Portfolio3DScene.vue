@@ -27,7 +27,7 @@ const props = withDefaults(
     screenObjectName: 'screen',
     embedUrl: '',
     screenFlip: false,
-    screenNudge: 0.5,
+    screenNudge: -0.02,
     screenScale: 1.0,
     screenTilt: 0.18
   }
@@ -40,6 +40,9 @@ const errorMessage = ref('')
 
 const cleanupState = ref<{
   onResize: () => void
+  onPointerEnter?: () => void
+  onPointerLeave?: () => void
+  onPointerMove?: (event: PointerEvent) => void
   frameRef: { current: number }
   renderer: { dispose: () => void }
   container: HTMLDivElement
@@ -50,6 +53,9 @@ onUnmounted(() => {
   const s = cleanupState.value
   if (s) {
     window.removeEventListener('resize', s.onResize)
+    if (s.onPointerEnter) s.container.removeEventListener('pointerenter', s.onPointerEnter)
+    if (s.onPointerLeave) s.container.removeEventListener('pointerleave', s.onPointerLeave)
+    if (s.onPointerMove) s.container.removeEventListener('pointermove', s.onPointerMove)
     cancelAnimationFrame(s.frameRef.current)
     s.renderer.dispose()
     try {
@@ -96,6 +102,9 @@ onMounted(async () => {
     controls.enableDamping = true
     controls.dampingFactor = 0.05
     controls.target.set(0, 1, 0)
+    controls.enableRotate = false
+    controls.enablePan = false
+    controls.enableZoom = false
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
     scene.add(ambientLight)
@@ -115,11 +124,16 @@ onMounted(async () => {
     modelBox.getSize(modelSize)
 
     const maxDim = Math.max(modelSize.x, modelSize.y, modelSize.z)
-    camera.position.copy(modelCenter).add(new THREE.Vector3(0, 0, maxDim * 1.5))
-    controls.target.copy(modelCenter)
+    // Enquadramento inicial de seguranca antes de calcularmos a camera da cena guiada.
+    const defaultCameraStartPosition = modelCenter.clone().add(new THREE.Vector3(0, maxDim * 0.75, maxDim * 2.8))
+    const defaultTargetStartPosition = modelCenter.clone().add(new THREE.Vector3(0, maxDim * 0.2, 0))
+    camera.position.copy(defaultCameraStartPosition)
+    controls.target.copy(defaultTargetStartPosition)
     controls.update()
 
     const cssScene = new THREE.Scene()
+    // Descobrimos o mesh da tela e o mesh principal do computador para alinhar o iframe
+    // e inferir qual lado do monitor deve ser tratado como a face frontal.
     const targetName = (props.screenObjectName || 'screen').toLowerCase()
     let screenMesh: THREE.Mesh | null = null
     let computerMesh: THREE.Mesh | null = null
@@ -151,6 +165,8 @@ onMounted(async () => {
         return
       }
 
+      // Reconstruimos os eixos da tela a partir do bounding box para obter largura,
+      // altura, profundidade e orientacao reais em mundo, sem depender do GLB estar perfeito.
       const localCenter = localBox.getCenter(new THREE.Vector3())
       const localSize = localBox.getSize(new THREE.Vector3())
       const worldScale = screenMesh.getWorldScale(new THREE.Vector3())
@@ -163,17 +179,21 @@ onMounted(async () => {
       const normalAxis = localAxes[0]
       const planeAxes = localAxes.slice(1)
       const screenCenter = localCenter.clone().applyMatrix4(screenMesh.matrixWorld)
-      let normalWorld = normalAxis.direction.clone().applyQuaternion(screenMesh.getWorldQuaternion(new THREE.Quaternion())).normalize()
+      const meshQuaternion = screenMesh.getWorldQuaternion(new THREE.Quaternion())
+      const surfaceNormalWorld = normalAxis.direction.clone().applyQuaternion(meshQuaternion).normalize()
+      const computerCenter = computerMesh
+        ? new THREE.Box3().setFromObject(computerMesh).getCenter(new THREE.Vector3())
+        : modelCenter.clone()
+      const outwardFromComputer = screenCenter.clone().sub(computerCenter).normalize()
 
-      const fromModelCenter = screenCenter.clone().sub(modelCenter).normalize()
-      if (normalWorld.dot(fromModelCenter) < 0) {
-        normalWorld.multiplyScalar(-1)
+      if (surfaceNormalWorld.dot(outwardFromComputer) < 0) {
+        surfaceNormalWorld.multiplyScalar(-1)
       }
 
       const worldUp = new THREE.Vector3(0, 1, 0)
       const planeAxisCandidates = planeAxes.map((axis) => ({
         ...axis,
-        worldDirection: axis.direction.clone().applyQuaternion(screenMesh.getWorldQuaternion(new THREE.Quaternion())).normalize()
+        worldDirection: axis.direction.clone().applyQuaternion(meshQuaternion).normalize()
       }))
 
       let verticalAxis = planeAxisCandidates[0]
@@ -189,10 +209,11 @@ onMounted(async () => {
       }
 
       let horizontalWorld = horizontalAxis.worldDirection.clone()
-      if (horizontalWorld.clone().cross(verticalWorld).dot(normalWorld) < 0) {
+      if (horizontalWorld.clone().cross(verticalWorld).dot(surfaceNormalWorld) < 0) {
         horizontalWorld.multiplyScalar(-1)
       }
 
+      let normalWorld = surfaceNormalWorld.clone()
       const toCamera = camera.position.clone().sub(screenCenter).normalize()
       const shouldFlipToCamera = normalWorld.dot(toCamera) < 0
       if (shouldFlipToCamera) {
@@ -218,7 +239,39 @@ onMounted(async () => {
       const width = horizontalAxis.size * getAxisWorldScale(horizontalAxis.key)
       const height = verticalAxis.size * getAxisWorldScale(verticalAxis.key)
       const depth = normalAxis.size * getAxisWorldScale(normalAxis.key)
-      const pushInsideDirection = modelCenter.clone().sub(screenCenter).normalize()
+      // Estes pontos definem a "cena cinematografica": camera longe no inicio,
+      // aproximacao ate a tela e alvo final centralizado no monitor.
+      const cameraEndTarget = screenCenter.clone().add(verticalWorld.clone().multiplyScalar(height * 0.02))
+      const cameraApproachDirection = normalWorld.clone().multiplyScalar(-1)
+      const cameraStartPosition = screenCenter
+        .clone()
+        .add(cameraApproachDirection.clone().multiplyScalar(maxDim * 2.1))
+        .add(verticalWorld.clone().multiplyScalar(maxDim * 0.55))
+        .add(horizontalWorld.clone().multiplyScalar(-maxDim * 0.9))
+      const targetStartPosition = cameraEndTarget.clone()
+      const cameraEndPosition = screenCenter
+        .clone()
+        .add(cameraApproachDirection.clone().multiplyScalar(maxDim * 0.06))
+        .add(verticalWorld.clone().multiplyScalar(maxDim * 0.01))
+      const cameraMidPosition = cameraStartPosition.clone().lerp(cameraEndPosition, 0.55)
+      const cameraPath = new THREE.CatmullRomCurve3([
+        cameraStartPosition.clone(),
+        cameraMidPosition,
+        cameraEndPosition
+      ])
+      const targetPath = new THREE.CatmullRomCurve3([
+        targetStartPosition.clone(),
+        cameraEndTarget.clone(),
+        cameraEndTarget.clone()
+      ])
+      // progress vai de 0 -> 1 conforme o hover; x/y guardam o parallax do mouse.
+      const pointerState = {
+        active: false,
+        x: 0,
+        y: 0,
+        progress: 0,
+        targetProgress: 0
+      }
 
       console.log('[Portfolio3DScene] Tela selecionada:', {
         name: screenMesh.name || '(sem nome)',
@@ -226,6 +279,9 @@ onMounted(async () => {
         height,
         depth
       })
+      camera.position.copy(cameraStartPosition)
+      controls.target.copy(targetStartPosition)
+      controls.update()
       screenMesh.visible = false
       const embedUrl = props.embedUrl || `${window.location.origin}/embed`
       const iframe = document.createElement('iframe')
@@ -239,9 +295,13 @@ onMounted(async () => {
       const css3dObject = new CSS3DObject(iframe)
       css3dObject.element.style.pointerEvents = 'auto'
 
-      const inset = props.screenNudge ?? 0.5
-      const fittedScreenPos = screenCenter.clone().sub(normalWorld.clone().multiplyScalar(depth * 0.25))
-      const worldPos = fittedScreenPos.add(pushInsideDirection.multiplyScalar(inset))
+      // A tela HTML e posicionada na face frontal do mesh "screen".
+      // Ajuste screenNudge para empurrar um pouco para fora ou para dentro.
+      const inset = props.screenNudge ?? -0.02
+      const frontFacePos = screenCenter
+        .clone()
+        .add(surfaceNormalWorld.clone().multiplyScalar(depth / 2))
+      const worldPos = frontFacePos.sub(surfaceNormalWorld.clone().multiplyScalar(inset))
 
       const basis = new THREE.Matrix4().makeBasis(horizontalWorld, verticalWorld, normalWorld)
       css3dObject.position.copy(worldPos)
@@ -254,6 +314,68 @@ onMounted(async () => {
       iframe.style.transform = 'translate(-50%, -50%)'
 
       cssScene.add(css3dObject)
+
+      // Hover inicia a aproximacao.
+      const onPointerEnter = () => {
+        pointerState.active = true
+        pointerState.targetProgress = 1
+      }
+
+      // Saiu da area: volta ao enquadramento inicial.
+      const onPointerLeave = () => {
+        pointerState.active = false
+        pointerState.targetProgress = 0
+      }
+
+      // O mouse nao troca a rota principal; ele so adiciona deslocamento sutil.
+      const onPointerMove = (event: PointerEvent) => {
+        const rect = container.getBoundingClientRect()
+        if (!rect.width || !rect.height) return
+        pointerState.x = (event.clientX - rect.left) / rect.width - 0.5
+        pointerState.y = (event.clientY - rect.top) / rect.height - 0.5
+        pointerState.targetProgress = 1
+      }
+
+      container.addEventListener('pointerenter', onPointerEnter)
+      container.addEventListener('pointerleave', onPointerLeave)
+      container.addEventListener('pointermove', onPointerMove)
+
+      const frameRef = { current: 0 }
+      // Loop principal da cena: interpola camera/alvo e renderiza WebGL + CSS3D.
+      function animate () {
+        frameRef.current = requestAnimationFrame(animate)
+        pointerState.progress = THREE.MathUtils.lerp(pointerState.progress, pointerState.targetProgress, 0.04)
+
+        const currentCameraPos = cameraPath.getPoint(pointerState.progress)
+        const currentTarget = targetPath.getPoint(pointerState.progress)
+        const parallax = Math.max(pointerState.progress, 0.15)
+        const cameraOffset = horizontalWorld.clone().multiplyScalar(pointerState.x * maxDim * 0.18 * parallax)
+        const targetOffset = horizontalWorld.clone().multiplyScalar(pointerState.x * maxDim * 0.1 * parallax)
+          .add(verticalWorld.clone().multiplyScalar(pointerState.y * maxDim * 0.08 * parallax))
+
+        camera.position.copy(currentCameraPos.add(cameraOffset))
+        controls.target.copy(currentTarget.add(targetOffset))
+        controls.update()
+        renderer.render(scene, camera)
+        cssRenderer.render(cssScene, camera)
+      }
+      animate()
+
+      window.addEventListener('resize', onResize)
+
+      cleanupState.value = {
+        onResize,
+        onPointerEnter,
+        onPointerLeave,
+        onPointerMove,
+        frameRef,
+        renderer,
+        container,
+        cssDomElement: cssRenderer.domElement
+      }
+
+      isLoaded.value = true
+      return
     }
 
     isLoaded.value = true
