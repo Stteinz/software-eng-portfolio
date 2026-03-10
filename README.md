@@ -12,7 +12,7 @@
     </td>
     <td>
       <div>
-        <img src="./web/docs/prototipo/prototipo-home.png" alt="Logo/Protótipo do Portfólio" width="120px" onerror="this.style.display='none'"/>
+        <img src="ChatGPT Image 10 de mar. de 2026, 16_58_44.png" alt="Logo/Protótipo do Portfólio" width="120px" onerror="this.style.display='none'"/>
       </div>
     </td>
   </tr> 
